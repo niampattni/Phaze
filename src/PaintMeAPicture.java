@@ -15,6 +15,8 @@ import java.awt.event.*;
  * <b>instructions </b> Creates an instance of the JButton class.
  * <p>
  * <b>exit </b> Creates an instance of the JButton class.
+ * @author Phaze Inc.
+ * @version 1 12/5/2016
  */
 public class PaintMeAPicture extends JFrame implements ActionListener {
     

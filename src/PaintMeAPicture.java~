@@ -6,15 +6,15 @@ import java.awt.event.*;
  * It is responsible for the main menu as well as any following windows.
  * The PaintMeAPicture class is-a JFrame and has-an ActionListener
  * <p>
- * <b>Instance Variables: <b>
+ * <b>Instance Variables: </b>
  * <p>
- * <b>play <b> Creates an instance of the JButton class.
+ * <b>play </b> Creates an instance of the JButton class.
  * <p>
- * <b>scores <b> Creates an instance of the JButton class.
+ * <b>scores </b> Creates an instance of the JButton class.
  * <p>
- * <b>instructions <b> Creates an instance of the JButton class.
+ * <b>instructions </b> Creates an instance of the JButton class.
  * <p>
- * <b>exit <b> Creates an instance of the JButton class.
+ * <b>exit </b> Creates an instance of the JButton class.
  */
 public class PaintMeAPicture extends JFrame implements ActionListener {
     
@@ -26,17 +26,13 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
      * its resizability to false, visibility to true, and the default close
      * operation to dispose on close. It also calls the mainMenu method.
      * <p>
-     * <b>Local Variables: <b>
+     * <b>Local Variables: </b>
      * <p>
-     * <b>menu <b> Creates an instance of the JPanel class.
+     * <b>menu </b> Creates an instance of the JPanel class.
      */
     public PaintMeAPicture() {
         super ("Paint Me a Picture!");
-<<<<<<< HEAD
-        setSize(200, 200);
-=======
         setSize(400, 400);
->>>>>>> origin/master
         JPanel menu = new JPanel();
         menu.setLayout(mainMenu(menu));
         add(menu);
@@ -54,13 +50,13 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
      * @param panel     This is a JPanel, specifically a Component.
      * @return GroupLayout     This is to set the layout in the JFrame.
      * <p>
-     * <b>Local Variables: <b>
+     * <b>Local Variables: </b>
      * <p>
-     * <b>g <b> This creates an instance of the GroupLayout class.
+     * <b>g </b> This creates an instance of the GroupLayout class.
      * <p>
-     * <b>vGroup <b> This creates an instance of the SequentialGroup class.
+     * <b>vGroup </b> This creates an instance of the SequentialGroup class.
      * <p>
-     * <b>hGroup <b> This creates an instance of the SequentialGroup class.
+     * <b>hGroup </b> This creates an instance of the SequentialGroup class.
      */
     public GroupLayout mainMenu(JPanel panel) {
         GroupLayout g = new GroupLayout(panel);
