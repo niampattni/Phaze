@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <drjava version="drjava-20140826-r5761">
-  <project autorefresh="false" build="bin/" main="" root="src/" work="">
+  <project autorefresh="false" build="bin/" root="src/" work="">
     <createjar file=""/>
     <source>
-      <file active="true" name="PaintMeAPicture.java" package="" timestamp="12-May-2016 10:46:02">
-        <select from="0" to="0"/>
+      <file active="true" name="Main.java" package="" timestamp="12-May-2016 10:46:02">
+        <select from="65" to="65"/>
         <scroll column="0" row="0"/>
       </file>
-      <file name="Main.java" package="" timestamp="12-May-2016 10:46:02">
-        <select from="0" to="0"/>
+      <file name="PaintMeAPicture.java" package="" timestamp="12-May-2016 11:03:22">
+        <select from="65" to="65"/>
         <scroll column="0" row="0"/>
       </file>
     </source>

@@ -7,10 +7,9 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
     
     public PaintMeAPicture() {
         super ("Paint Me a Picture!");
-        setSize(1000, 1000);
+        setSize(200, 200);
         JPanel menu = new JPanel();
-        GroupLayout layout = mainMenu(menu);
-        menu.setLayout(layout);
+        menu.setLayout(mainMenu(menu));
         add(menu);
         setResizable(false);
         setVisible(true);
