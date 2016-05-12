@@ -3,11 +3,11 @@
   <project autorefresh="false" build="bin/" root="src/" work="">
     <createjar file=""/>
     <source>
-      <file active="true" name="PaintMeAPicture.java" package="" timestamp="12-May-2016 11:14:26">
+      <file active="true" name="PaintMeAPicture.java" package="" timestamp="12-May-2016 11:19:06">
         <select from="642" to="642"/>
         <scroll column="0" row="0"/>
       </file>
-      <file name="Main.java" package="" timestamp="12-May-2016 11:13:44">
+      <file name="Main.java" package="" timestamp="12-May-2016 11:19:06">
         <select from="642" to="642"/>
         <scroll column="0" row="0"/>
       </file>
