@@ -19,6 +19,11 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
     public PaintMeAPicture() {
         super ("Paint Me a Picture!");
         setSize(400, 400);
+        GraphicsWindow window = new GraphicsWindow();
+        add (window);
+        window.drawLine(100, 100, 300, 300);
+        repaint();
+        revalidate();
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
