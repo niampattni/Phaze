@@ -15,20 +15,6 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
      * a call of super. It sets the size to 400x400, adds the menu JPanel, sets
      * its resizability to false, visibility to true, and the default close
      * operation to dispose on close. It also calls the mainMenu method.
-     * <p>
-     * <b>Local Variables: </b>
-     * <p>
-     * <b>Instance Variables: </b>
-     * <p>
-     * <b>play </b> Creates an instance of the JButton class.
-     * <p>
-     * <b>scores </b> Creates an instance of the JButton class.
-     * <p>
-     * <b>instructions </b> Creates an instance of the JButton class.
-     * <p>
-     * <b>exit </b> Creates an instance of the JButton class.
-     * <p>
-     * <b>menu </b> Creates an instance of the JPanel class.
      */
     public PaintMeAPicture() {
         super ("Paint Me a Picture!");
