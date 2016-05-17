@@ -32,7 +32,10 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
         menu.add(exit);
         menu.add(instructions);
         menu.add(scores);
+<<<<<<< HEAD
         add(menu);
+=======
+>>>>>>> origin/master
         setResizable(false);
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
