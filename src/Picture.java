@@ -21,5 +21,19 @@ public class Picture{
         return this.difficulty;
     }
     
+    public void setColour(String newColor,int x, int y){
+        Pixel [][] picture = this.getPixels();
+        
+    }
+    
+    public void erase (){
+        
+    }
+    
+    private void fillColour(Pixel [][] picture, int x, int y){
+        picture[x]
+    }
+    
+    
     
 }
