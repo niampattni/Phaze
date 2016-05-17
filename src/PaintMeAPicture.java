@@ -40,7 +40,7 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
         add(location);
         play.addActionListener(this);
         exit.addActionListener(this);
-        instructions.addActionsListener(this);
+        instructions.addActionListener(this);
         scores.addActionListener(this);
         this.addMouseListener(listener);
         setResizable(false);
@@ -54,6 +54,10 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
             yVal = e.getY();
             location.setText(xVal + ", " + yVal);
         }
+        public void mouseClicked (MouseEvent e) {}
+        public void mousePressed (MouseEvent e) {}
+        public void mouseEntered (MouseEvent e) {}
+        public void mouseExited (MouseEvent e) {}
     };
     
     public void actionPerformed(ActionEvent e) {
