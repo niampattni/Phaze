@@ -11,7 +11,6 @@ import java.awt.event.*;
 public class PaintMeAPicture extends JFrame implements ActionListener {
     
     int xVal, yVal;
-    JLabel location;
     
     /**
      * The class constructor is responsible for initializing the JFrame through
@@ -26,7 +25,6 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
         JButton exit = new JButton("Exit");
         JButton instructions = new JButton("Instructions");
         JButton scores = new JButton("Scores");
-        location = new JLabel("0, 0");
         JPanel menu = new JPanel();
         FlowLayout layout = new FlowLayout();
         menu.setLayout(layout);
@@ -37,7 +35,6 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
         menu.add(instructions);
         menu.add(scores);
         add(menu);
-        add(location);
         play.addActionListener(this);
         exit.addActionListener(this);
         instructions.addActionListener(this);
@@ -52,7 +49,6 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
         public void mouseReleased(MouseEvent e) {
             xVal = e.getX();
             yVal = e.getY();
-            location.setText(xVal + ", " + yVal);
         }
         public void mouseClicked (MouseEvent e) {}
         public void mousePressed (MouseEvent e) {}

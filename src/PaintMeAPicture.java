@@ -57,7 +57,9 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
     };
     
     public void actionPerformed(ActionEvent e) {
-      
+      if (e.getActionCommand().equals("Exit")) {
+        System.exit(0);
+      }
     }
     
 }
