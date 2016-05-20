@@ -30,8 +30,8 @@ public class Picture{
         
     }
     
-    private void fillColour(Pixel [][] picture, int x, int y){
-        picture[x]
+    private void fillColour(Pixel [][] picture, int x, int y,){
+        picture[x][y]
     }
     
     
