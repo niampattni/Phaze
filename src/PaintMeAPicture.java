@@ -124,14 +124,14 @@ public class PaintMeAPicture extends JFrame implements ActionListener {
      * <b>else </b> If the scores JBUtton is clicked.
      */
     public void actionPerformed(ActionEvent e) {
-      if (e.getActionCommand.equals("Play"))
-      //play
-      else if (e.getActionCommand.equals("Exit"))
-      //exit
-      else if (e.getActionCommand.equals("Instructions"))
-      //instructions
-      else 
-      //goodbye
+      if (e.getActionCommand().equals("Play")) {
+      }
+      else if (e.getActionCommand().equals("Exit")) {
+      }
+      else if (e.getActionCommand().equals("Instructions")) {
+      }
+      else {
+      }
     }
     
     /**
