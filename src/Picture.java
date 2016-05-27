@@ -9,7 +9,7 @@ import javax.swing.*;
  * <b>colours </b> This holds all the colours in the picture.
  * 
  * @author Phaze Inc.
- * @version 2 20/5/2016
+ * @version 3 27/5/2016
  */
 public class Picture extends JPanel{
     private int difficulty;

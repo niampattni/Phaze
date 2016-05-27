@@ -1,11 +1,12 @@
+import javax.swing.*;
 /**
  * The Picture class creates the picture that the player will be colouring in.
  * <p>
  * <b>Instance Variables:</b>
  * <p>
- * <b>difficulty</b> This holds the difficulty of the picture.
+ * <b>difficulty </b> This holds the difficulty of the picture.
  * <p>
- * <b>colours></b> This holds all the colours in the picture.
+ * <b>colours </b> This holds all the colours in the picture.
  * 
  * @author Phaze Inc.
  * @version 2 20/5/2016
@@ -23,7 +24,7 @@ public class Picture extends JPanel{
     public Picture(String [] colours,int difficulty)
     {
         this.difficulty=difficulty;
-        this.coloured=coloured;
+        //this.coloured=coloured;
         this.colours=colours;   
     }
     
@@ -50,7 +51,7 @@ public class Picture extends JPanel{
      * @param y the y coordinate of where the mouse clicked
      */
     public void setColour(String newColor,int x, int y){
-        Pixel [][] picture = this.getPixels();
+        //Pixel [][] picture = this.getPixels();
         
     }
     /**

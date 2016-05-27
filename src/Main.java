@@ -1,7 +1,7 @@
 /**
  * The Main class, this will run the game.
  * @author Phaze Inc.
- * @version 2 20/5/2016
+ * @version 3 27/5/2016
  */
 public class Main {
   /**
