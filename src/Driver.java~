@@ -1,0 +1,17 @@
+import javax.swing.*;
+public class Driver extends JFrame {
+  
+  public Driver() {
+    setSize(1200, 900);
+    setVisible(true);
+    setResizable(false);
+    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    JPanel panel = new MainMenu();
+    add(panel);
+  }
+  
+  public static void main(String[] args) {
+    new Driver();
+  }
+  
+}
