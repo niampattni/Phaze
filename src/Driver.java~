@@ -5,7 +5,7 @@ public class Driver {
   public static String username;
   
   public Driver() {
-    frame.setSize(1200, 1000);
+    frame.setSize(1200, 930);
     frame.getContentPane().removeAll();
     frame.getContentPane().add(new MainMenu());
     frame.setVisible(true);
