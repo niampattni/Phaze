@@ -7,23 +7,11 @@
         <select from="537" to="537"/>
         <scroll column="0" row="0"/>
       </file>
-      <file name="Picture.java" package="" timestamp="30-May-2016 10:07:16">
-        <select from="537" to="537"/>
-        <scroll column="0" row="0"/>
-      </file>
-      <file name="PaintMeAPicture.java" package="" timestamp="30-May-2016 10:07:16">
-        <select from="537" to="537"/>
-        <scroll column="0" row="0"/>
-      </file>
-      <file name="TestChange.java" package="" timestamp="31-May-2016 10:11:07">
-        <select from="537" to="537"/>
-        <scroll column="0" row="0"/>
-      </file>
       <file name="LevelSelect.java" package="" timestamp="31-May-2016 11:02:12">
         <select from="537" to="537"/>
         <scroll column="0" row="0"/>
       </file>
-      <file name="Driver.java" package="" timestamp="31-May-2016 11:04:17">
+      <file name="Driver.java" package="" timestamp="31-May-2016 11:08:36">
         <select from="537" to="537"/>
         <scroll column="0" row="0"/>
       </file>
