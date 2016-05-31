@@ -1,15 +1,33 @@
 import javax.swing.*;
-import java.awt.*;
-public class Driver extends JFrame {
+public class Driver {
+  
+  public static JFrame frame = new JFrame("Game Window");
+  public static String username;
   
   public Driver() {
-    super("Game Window");
-    setSize(1200, 900);
-    setVisible(true);
-    setResizable(false);
-    setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setContentPane(new MainMenu());
-    add(new MainMenu());
+    frame.setSize(1200, 1000);
+    frame.getContentPane().removeAll();
+    frame.getContentPane().add(new MainMenu());
+    frame.setVisible(true);
+    frame.setResizable(false);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }
+  
+  public static void changeScreens(String className) {
+    Class<?> c = null;
+    try {
+      c = Class.forName(className);
+      frame.getContentPane().removeAll();
+      frame.getContentPane().add( (JPanel) c.newInstance());
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (InstantiationException ie) {
+      ie.printStackTrace();
+    } catch (IllegalAccessException iae) {
+      iae.printStackTrace();
+    }
+    frame.revalidate();
+    frame.repaint();
   }
   
   public static void main(String[] args) {

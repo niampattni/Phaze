@@ -1,0 +1,6 @@
+public class TestChange extends JPanel {
+  Driver d = new Driver();
+  public TestChange() {
+    d.changeScreens("TestChange");
+  }
+}

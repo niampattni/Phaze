@@ -1,17 +1,38 @@
 import javax.swing.*;
 import java.io.*;
+import java.awt.*;
 import java.awt.image.*;
+import java.awt.event.*;
 import javax.imageio.*;
 public class MainMenu extends JPanel {
   
+  BufferedImage bImg;
+  
   public MainMenu() {
-    BufferedImage bImg;
     JLabel bg;
     try {
       bImg = ImageIO.read(this.getClass().getResource("MainMenuBG.png"));
-      bg = new JLabel(new ImageIcon(bImg));
-      add(bg);
-    } catch (IOException e) {}
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    bg = new JLabel(new ImageIcon(bImg));
+    add(bg);
+    bg.addMouseListener(listener);
   }
+  
+  MouseListener listener = new MouseListener() {
+    public void mouseClicked(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+      Driver.changeScreens("TestChange");
+    }
+  };
+  
+  protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(bImg, 0, 0, this);
+    }
   
 }
