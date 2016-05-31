@@ -1,0 +1,17 @@
+import javax.swing.*;
+public class LevelSelect extends JPanel {
+  
+  BufferedImage bImg;
+  
+  public LevelSelect() {
+    JLabel bg;
+    try {
+      bImg = ImageIO.read(this.getClass().getResource("TestBG.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    bg = new JLabel(new ImageIcon(bImg));
+    add(bg);
+  }
+  
+}
