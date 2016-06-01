@@ -1,0 +1,18 @@
+import java.awt.*;
+public abstract class Game {
+  
+  public void colour(/*Pixel pixel,*/ Color newColour) }{
+    
+  }
+  
+  MouseListener listener = new MouseListener() {
+    public void mouseClicked(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+      
+    }
+  };
+  
+}
