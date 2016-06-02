@@ -63,6 +63,7 @@ public class MainMenu extends JPanel implements ActionListener {
       Driver.username = input.getText();
       dialog.dispose();
       System.out.println(Driver.username);
+      Driver.changeScreens("LevelSelect");
     }
   }
   
