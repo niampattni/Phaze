@@ -425,7 +425,7 @@ public class SimplePicture implements DigitalPicture
  public void explore()
  {
    // create a copy of the current picture and explore it
-   explorer = new PictureExplorer(new SimplePicture(this));
+   explorer = new PictureExplorer(this);
  }
  
  /**

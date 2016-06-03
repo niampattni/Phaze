@@ -22,8 +22,8 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
 {
   
   private int rad=255;
-  private int grad=255;
-  private int blah=255;
+  private int grad=0;
+  private int blah=0;
   
   // current indicies
   /** row index */
@@ -135,15 +135,15 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   private void createAndInitScrollingImage()
   {
-    //scrollPane = new JScrollPane();
+    scrollPane = new JScrollPane();
     
     BufferedImage bimg = picture.getBufferedImage();
     imageDisplay = new ImageDisplay(bimg);
     imageDisplay.addMouseMotionListener(this);
     imageDisplay.addMouseListener(this);
-    //imageDisplay.setToolTipText("Click a mouse button on a pixel to see the pixel information");
-    //scrollPane.setViewportView(imageDisplay);
-    //pictureFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    imageDisplay.setToolTipText("Click a mouse button on a pixel to see the pixel information");
+    scrollPane.setViewportView(imageDisplay);
+    pictureFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
   }
   
   /**
@@ -272,7 +272,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
     });
     
     // set up the next and previous buttons
-    setUpNextAndPreviousButtons();
+    //setUpNextAndPreviousButtons();
     
     // set up the font for the labels
     colLabel.setFont(labelFont);
@@ -501,7 +501,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   public void mouseDragged(MouseEvent e)
   {
-    displayPixelInformation(e);
+    //displayPixelInformation(e);
     colour(e);
   }
   
@@ -593,6 +593,9 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   }
   private void colour (MouseEvent e)
   {
+    createPixel();
+    if (isLocationInPicture(e.getX(), e.getY()))
+      colour(e.getX(), e.getY());
   }
   
   public void colour(int initialX, int initialY){

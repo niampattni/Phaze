@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import javax.imageio.*;
+import java.util.*;
 public class LevelOne extends JPanel {
   BufferedImage blankImage, colourImage, bImg;
   JLabel blank, colour, bg;
   Pixel pixel;
-  int x, y, bgx, bgy;
   
   public LevelOne() {
     try {
@@ -20,11 +20,35 @@ public class LevelOne extends JPanel {
     }
     blank = new JLabel(new ImageIcon(blankImage));
     colour = new JLabel(new ImageIcon(colourImage));
-    Picture pic = new Picture("TeddyBear.png");
-    pic.explore();
+    add(blank);
+    add(colour);
     revalidate();
     repaint();
     blank.addMouseListener(listener);
+  }
+  
+  public void colour(int initialX, int initialY){
+    Color color = new Color(255, 0, 0);
+    Stack<Point> points = new Stack<Point>();
+    points.add(new Point(initialX, initialY));
+    
+    while(!points.isEmpty()) {
+      Point currentPoint = points.pop();
+      int x = currentPoint.x;
+      int y = currentPoint.y;
+      
+      int current = blankImage.getRGB(x, y);
+      if((current != Color.BLACK.getRGB()) && (current != color.getRGB())){
+        blankImage.setRGB(x, y, color.getRGB());
+        
+        points.push(new Point(x+1, y));
+        points.push(new Point(x-1, y));
+        points.push(new Point(x, y+1));
+        points.push(new Point(x, y-1));
+      }
+      System.out.println("Colouring");
+    }
+    updateScreen();
   }
   
   private void updateScreen() {
@@ -40,9 +64,7 @@ public class LevelOne extends JPanel {
     public void mouseExited(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {
-      x = e.getX();
-      y = e.getY();
-      //colour(Colour.RED, x, y);
+      colour(e.getX(), e.getY());
     }
   };
   

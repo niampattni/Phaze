@@ -91,11 +91,11 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
     zoomFactor=1;
     
     // create the window and set things up
-    BufferedImage bimg = picture.getBufferedImage();
-    imageDisplay = new ImageDisplay(bimg);
-    imageDisplay.addMouseMotionListener(this);
-    imageDisplay.addMouseListener(this);
-    //createWindow();
+    createWindow();
+  }
+  
+  public JPanel getDisplay() {
+    return imageDisplay;
   }
   
   /**
@@ -135,15 +135,15 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   private void createAndInitScrollingImage()
   {
-    scrollPane = new JScrollPane();
+    //scrollPane = new JScrollPane();
     
     BufferedImage bimg = picture.getBufferedImage();
     imageDisplay = new ImageDisplay(bimg);
     imageDisplay.addMouseMotionListener(this);
     imageDisplay.addMouseListener(this);
-    imageDisplay.setToolTipText("Click a mouse button on a pixel to see the pixel information");
-    scrollPane.setViewportView(imageDisplay);
-    pictureFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    //imageDisplay.setToolTipText("Click a mouse button on a pixel to see the pixel information");
+    //scrollPane.setViewportView(imageDisplay);
+    //pictureFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
   }
   
   /**
@@ -152,17 +152,17 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   private void createWindow()
   {
     // create the picture frame and initialize it
-    //createAndInitPictureFrame();
+    createAndInitPictureFrame();
     
     //create the information panel
     //createInfoPanel();
     
     //creates the scrollpane for the picture
-   // createAndInitScrollingImage();
+    createAndInitScrollingImage();
     
     // show the picture in the frame at the size it needs to be
-    //pictureFrame.pack();
-    //pictureFrame.setVisible(true);
+    pictureFrame.pack();
+    pictureFrame.setVisible(true);
   }
   
   /**
@@ -593,9 +593,6 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   }
   private void colour (MouseEvent e)
   {
-    createPixel();
-    if (isLocationInPicture(e.getX(),e.getY()))
-      colour (e.getX(),e.getY());
   }
   
   public void colour(int initialX, int initialY){
@@ -676,8 +673,8 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   public void mouseClicked(MouseEvent e)
   {
-    displayPixelInformation(e);
-    colour(e);
+    //displayPixelInformation(e);
+    //colour(e);
   }
   
   /**
@@ -686,7 +683,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */ 
   public void mousePressed(MouseEvent e)
   {
-    displayPixelInformation(e);
+    //displayPixelInformation(e);
   }
   
   /**
@@ -695,6 +692,9 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   public void mouseReleased(MouseEvent e)
   {
+    createPixel();
+    if (isLocationInPicture(e.getX(),e.getY()))
+      colour (e.getX(),e.getY());
   }
   
   /**
