@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
@@ -17,7 +18,7 @@ public class Pixel
   
   ////////////////////////// fields ///////////////////////////////////
   
-  private BufferedImage picture;
+  private DigitalPicture picture;
   
   /** the x (column) location of this pixel in the picture; (0,0) is top left */
   private int x; 
@@ -34,7 +35,7 @@ public class Pixel
    * @param x the x location of the pixel in the picture
    * @param y the y location of the pixel in the picture
    */
-  public Pixel(BufferedImage picture, int x, int y)
+  public Pixel(DigitalPicture picture, int x, int y)
   {
     // set the picture
     this.picture = picture;
@@ -45,10 +46,6 @@ public class Pixel
     // set the y location
     this.y = y;
     
-  }
-  
-  public BufferedImage getImage() {
-    return picture;
   }
   
   ///////////////////////// methods //////////////////////////////
@@ -87,8 +84,8 @@ public class Pixel
     /* get the value at the location from the picture as a 32 bit int
      * with alpha, red, green, blue each taking 8 bits from left to right
      */
-    int value = picture.getRGB(x,y);
-    
+    int value = picture.getBasicPixel(x,y);
+
     // get the alpha value (starts at 25 so shift right 24)
     // then and it with all 1's for the first 8 bits to keep
     // end up with from 0 to 255 
@@ -96,7 +93,7 @@ public class Pixel
     
     return alpha;
   }
-  
+    
   
   /**
    * Method to get the amount of red at this pixel.  It will be
@@ -109,8 +106,8 @@ public class Pixel
     /* get the value at the location from the picture as a 32 bit int
      * with alpha, red, green, blue each taking 8 bits from left to right
      */
-    int value = picture.getRGB(x,y);
-    
+    int value = picture.getBasicPixel(x,y);
+
     // get the red value (starts at 17 so shift right 16)
     // then AND it with all 1's for the first 8 bits to 
     // end up with a resulting value from 0 to 255 
@@ -141,8 +138,8 @@ public class Pixel
     /* get the value at the location from the picture as a 32 bit int
      * with alpha, red, green, blue each taking 8 bits from left to right
      */
-    int value = picture.getRGB(x,y);
-    
+    int value = picture.getBasicPixel(x,y);
+
     // get the green value (starts at 9 so shift right 8)
     int green = (value >>  8) & 0xff;
     
@@ -171,8 +168,8 @@ public class Pixel
     /* get the value at the location from the picture as a 32 bit int
      * with alpha, red, green, blue each taking 8 bits from left to right
      */
-    int value = picture.getRGB(x,y);
-    
+    int value = picture.getBasicPixel(x,y);
+
     // get the blue value (starts at 0 so no shift required)
     int blue = value & 0xff;
     
@@ -196,11 +193,11 @@ public class Pixel
    */
   public Color getColor() 
   { 
-    /* get the value at the location from the picture as a 32 bit int
+     /* get the value at the location from the picture as a 32 bit int
      * with alpha, red, green, blue each taking 8 bits from left to right
      */
-    int value = picture.getRGB(x,y);
-    
+    int value = picture.getBasicPixel(x,y);
+
     // get the red value (starts at 17 so shift right 16)
     // then AND it with all 1's for the first 8 bits to 
     // end up with a resulting value from 0 to 255 
@@ -244,7 +241,7 @@ public class Pixel
     int value = (alpha << 24) + (red << 16) + (green << 8) + blue;
     
     // update the picture with the int value
-    picture.setRGB(x,y,value);
+    picture.setBasicPixel(x,y,value);
   }
   
   /**
@@ -300,7 +297,7 @@ public class Pixel
     updatePicture(getAlpha(), getRed(), getGreen(), blue);
   } 
   
-  /**
+   /**
    * Method to set the alpha (transparency) to a new alpha value
    * @param value the new value to use
    */
@@ -312,16 +309,16 @@ public class Pixel
     // update the associated picture
     updatePicture(alpha, getRed(), getGreen(), getBlue());
   } 
-  
-  /**
-   * Method to get the average of the colors of this pixel
-   * @return the average of the red, green, and blue values
-   */
-  public double getAverage()
-  {
-    double average = (getRed() + getGreen() + getBlue()) / 3.0;
-    return average;
-  }
+
+ /**
+  * Method to get the average of the colors of this pixel
+  * @return the average of the red, green, and blue values
+  */
+ public double getAverage()
+ {
+   double average = (getRed() + getGreen() + getBlue()) / 3.0;
+   return average;
+ }
   
   /**
    * Method to return a string with information about this pixel
@@ -335,5 +332,5 @@ public class Pixel
       " green=" + getGreen() + 
       " blue=" + getBlue();
   }
-  
+
 }

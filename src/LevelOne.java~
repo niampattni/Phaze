@@ -4,29 +4,34 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import javax.imageio.*;
-public class LevelOne extends Game {
-  
-  BufferedImage bImg;
-  int x = 0, y = 0;
+public class LevelOne extends JPanel {
+  BufferedImage blankImage, colourImage, bImg;
+  JLabel blank, colour, bg;
+  Pixel pixel;
+  int x, y, bgx, bgy;
   
   public LevelOne() {
-    JLabel bg;
     try {
       bImg = ImageIO.read(this.getClass().getResource("TestBG.png"));
+      blankImage = ImageIO.read(this.getClass().getResource("TeddyBear.png"));
+      colourImage = ImageIO.read(this.getClass().getResource("TeddyBearC.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
-    bg = new JLabel(new ImageIcon(bImg));
-    JLabel blank;
-    bg.addMouseListener(bgListener);
-    while (!win) {
-      loadNextImages();
-      blank = new JLabel(new ImageIcon(blankImage));
-      blank.addMouseListener(listener);
-      while (!checkComplete()) {
-        colour(Game.RED, x, y);
-      }
-    }
+    blank = new JLabel(new ImageIcon(blankImage));
+    colour = new JLabel(new ImageIcon(colourImage));
+    Picture pic = new Picture("TeddyBear.png");
+    pic.explore();
+    revalidate();
+    repaint();
+    blank.addMouseListener(listener);
+  }
+  
+  private void updateScreen() {
+    blank = new JLabel(new ImageIcon(blankImage));
+    colour = new JLabel(new ImageIcon(colourImage));
+    revalidate();
+    repaint();
   }
   
   MouseListener listener = new MouseListener() {
@@ -37,24 +42,13 @@ public class LevelOne extends Game {
     public void mouseReleased(MouseEvent e) {
       x = e.getX();
       y = e.getY();
+      //colour(Colour.RED, x, y);
     }
   };
   
-  MouseListener bgListener = new MouseListener() {
-    public void mouseClicked(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
-    public void mouseExited(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {
-      System.out.println("BG Works");
-    }
-  };
-  
-  public void paintComponent(Graphics g) {
+  protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(bImg, 0, 0, this);
-    g.drawImage(blankImage, 200, 100, this);
-    g.drawImage(colourImage, 500, 100, this);
   }
   
 }
