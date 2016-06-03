@@ -30,6 +30,10 @@ public class Driver {
     frame.repaint();
   }
   
+  public static void error(String message, String title) {
+    JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
+  }
+  
   public static void main(String[] args) {
     new Driver();
   }

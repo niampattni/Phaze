@@ -47,6 +47,10 @@ public class Pixel
     
   }
   
+  public BufferedImage getImage() {
+    return picture;
+  }
+  
   ///////////////////////// methods //////////////////////////////
   
   /**
