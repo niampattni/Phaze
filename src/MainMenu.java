@@ -33,7 +33,7 @@ public class MainMenu extends JPanel implements ActionListener {
       if (x >= 642 && x <= 795 && y >= 171 && y <= 319) {
         usernameDialog();
       } else if (x >= 523 && x <= 674 && y >= 371 && y <= 523) {
-        System.out.println("Scores");
+        Driver.changeScreens("Highscores");
       } else if (x >= 886 && x <= 1038 && y >= 247 && y <= 400) {
         System.exit(0);
       } else if (x >= 882 && x <= 1173 && y >= 608 && y <= 768) {

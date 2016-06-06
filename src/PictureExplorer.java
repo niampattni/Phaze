@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.image.*;
 import javax.swing.border.*;
 import java.awt.image.BufferedImage;
+import java.io.*;
+import javax.imageio.*;
 import java.util.*;
 /**
  * Displays a picture and lets you explore the picture by displaying the row, column, red,
@@ -18,12 +20,13 @@ import java.util.*;
  * @author Keith McDermottt, gte047w@cc.gatech.edu modified by Phaze Inc.
  * @author Barb Ericson ericson@cc.gatech.edu modified by Phaze Inc.
  */
-public class PictureExplorer implements MouseMotionListener, ActionListener, MouseListener
+public class PictureExplorer extends JPanel implements MouseMotionListener, ActionListener, MouseListener
 {
   
   private int rad=255;
-  private int grad=0;
-  private int blah=0;
+  private int grad=255;
+  private int blah=255;
+  private int count = 0;
   
   // current indicies
   /** row index */
@@ -33,9 +36,12 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   
   // main GUI
   /** window to hold GUI */
-  private JFrame pictureFrame;
+  private JPanel pictureFrame;
   /** window that allows the user to scroll to see a large picture */
   private JScrollPane scrollPane;
+  
+  private BufferedImage colImg;
+  private BufferedImage bimg;
   
   // GUI components
   /** column label */
@@ -84,18 +90,14 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    * Public constructor 
    * @param picture the picture to explore
    */
-  public PictureExplorer(DigitalPicture picture)
+  public PictureExplorer(DigitalPicture picture, int colors)
   {
     // set the fields
     this.picture=picture;
     zoomFactor=1;
     
     // create the window and set things up
-    createWindow();
-  }
-  
-  public JPanel getDisplay() {
-    return imageDisplay;
+    createWindow(colors);
   }
   
   /**
@@ -112,7 +114,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   public void setTitle(String title)
   {
-    pictureFrame.setTitle(title);
+    //pictureFrame.setTitle(title);
   }
   
   /**
@@ -120,11 +122,12 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   private void createAndInitPictureFrame()
   {
-    pictureFrame = new JFrame(); // create the JFrame
-    pictureFrame.setResizable(true);  // allow the user to resize it
-    pictureFrame.getContentPane().setLayout(new BorderLayout()); // use border layout
-    pictureFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // when close stop
-    pictureFrame.setTitle(picture.getTitle());
+    pictureFrame = new JPanel(); // create the JFrame
+    pictureFrame.setSize(1200, 930);
+    //pictureFrame.setResizable(false);  // allow the user to resize it
+    //pictureFrame.getContentPane().setLayout(new BorderLayout()); // use border layout
+    //pictureFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // when close stop
+    //pictureFrame.setTitle("Game Window");
     PictureExplorerFocusTraversalPolicy newPolicy = new PictureExplorerFocusTraversalPolicy();
     pictureFrame.setFocusTraversalPolicy(newPolicy);
     
@@ -135,33 +138,44 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   private void createAndInitScrollingImage()
   {
-    scrollPane = new JScrollPane();
+    //scrollPane = new JScrollPane();
     
-    BufferedImage bimg = picture.getBufferedImage();
+    bimg = picture.getBufferedImage();
+    
+    try {
+      colImg = ImageIO.read(this.getClass().getResource("TeddyBearC.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
     imageDisplay = new ImageDisplay(bimg);
+    ImageDisplay colDisplay = new ImageDisplay(colImg);
     imageDisplay.addMouseMotionListener(this);
     imageDisplay.addMouseListener(this);
-    imageDisplay.setToolTipText("Click a mouse button on a pixel to see the pixel information");
-    scrollPane.setViewportView(imageDisplay);
-    pictureFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    //imageDisplay.setToolTipText("Click a mouse button on a pixel to see the pixel information");
+    //scrollPane.setViewportView(imageDisplay);
+    JPanel panel = new JPanel(new FlowLayout());
+    panel.add(imageDisplay);
+    panel.add(colDisplay);
+    add(panel);
   }
   
   /**
    * Creates the JFrame and sets everything up
    */
-  private void createWindow()
+  private void createWindow(int colors)
   {
     // create the picture frame and initialize it
     createAndInitPictureFrame();
     
     //create the information panel
-    //createInfoPanel();
+    createInfoPanel(colors);
     
     //creates the scrollpane for the picture
     createAndInitScrollingImage();
     
     // show the picture in the frame at the size it needs to be
-    pictureFrame.pack();
+    //pictureFrame.pack();
     pictureFrame.setVisible(true);
   }
   
@@ -206,7 +220,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         colIndex--;
         if (colIndex < 0)
           colIndex = 0;
-        displayPixelInformation(colIndex,rowIndex);
+        //displayPixelInformation(colIndex,rowIndex);
       }
     });
     
@@ -216,7 +230,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         rowIndex--;
         if (rowIndex < 0)
           rowIndex = 0;
-        displayPixelInformation(colIndex,rowIndex);
+        //displayPixelInformation(colIndex,rowIndex);
       }
     });
     
@@ -226,7 +240,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         colIndex++;
         if (colIndex >= picture.getWidth())
           colIndex = picture.getWidth() - 1;
-        displayPixelInformation(colIndex,rowIndex);
+        //displayPixelInformation(colIndex,rowIndex);
       }
     });
     
@@ -236,7 +250,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         rowIndex++;
         if (rowIndex >= picture.getHeight())
           rowIndex = picture.getHeight() - 1;
-        displayPixelInformation(colIndex,rowIndex);
+        //displayPixelInformation(colIndex,rowIndex);
       }
     });
   }
@@ -261,18 +275,18 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
     colValue = new JTextField(Integer.toString(colIndex + numberBase),6);
     colValue.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        displayPixelInformation(colValue.getText(),rowValue.getText());
+        //displayPixelInformation(colValue.getText(),rowValue.getText());
       }
     });
     rowValue = new JTextField(Integer.toString(rowIndex + numberBase),6);
     rowValue.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        displayPixelInformation(colValue.getText(),rowValue.getText());
+        //displayPixelInformation(colValue.getText(),rowValue.getText());
       }
     });
     
     // set up the next and previous buttons
-    //setUpNextAndPreviousButtons();
+    setUpNextAndPreviousButtons();
     
     // set up the font for the labels
     colLabel.setFont(labelFont);
@@ -302,7 +316,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    * @param labelFont the font to use for labels
    * @return the color information panel
    */
-  private JPanel createColorInfoPanel(Font labelFont)
+  private JPanel createColorInfoPanel(Font labelFont, int colors)
   {
     // create a color info panel
     JPanel colorInfoPanel = new JPanel();
@@ -311,16 +325,15 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
     // get the pixel at the x and y
     Pixel pixel = new Pixel(picture,colIndex,rowIndex);
     JButton red = new JButton("Red");
-    JButton green = new JButton ("Green");
     JButton blue = new JButton ("Blue");
-    JButton yel = new JButton ("Yellow");
-    yel.addActionListener(new ActionListener()
-                            {
+    JButton yellow = new JButton ("Yellow");
+    yellow.addActionListener(new ActionListener()
+                               {
       public void actionPerformed(ActionEvent e)
       {
-        rad=255;
+        rad=0;
         grad=255;
-        blah=0;  
+        blah=0;
       }
     });
     red.addActionListener(new ActionListener()
@@ -329,15 +342,6 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
       {
         rad=255;
         grad=0;
-        blah=0;  
-      }
-    });
-    green.addActionListener(new ActionListener()
-                              {
-      public void actionPerformed(ActionEvent e)
-      {
-        rad=0;
-        grad=255;
         blah=0;  
       }
     });
@@ -350,37 +354,71 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         blah=255;         
       }
     });
-    colorInfoPanel.add(red);
-    colorInfoPanel.add(blue);
-    colorInfoPanel.add(green);
-    colorInfoPanel.add(yel);
+    add(red);
+    add(yellow);
+    add(blue);
+    if (colors == 6) {
+      JButton orange = new JButton("Orange");
+      JButton purple = new JButton ("Purple");
+      JButton green = new JButton ("Green");
+      green.addActionListener(new ActionListener()
+                                {
+        public void actionPerformed(ActionEvent e)
+        {
+          rad=0;
+          grad=255;
+          blah=0;  
+        }
+      });
+      orange.addActionListener(new ActionListener()
+                                 {
+        public void actionPerformed(ActionEvent e)
+        {
+          rad=255;
+          grad=128;
+          blah=0;
+        }
+      });
+      purple.addActionListener(new ActionListener()
+                                 {
+        public void actionPerformed(ActionEvent e)
+        {
+          rad=128;
+          grad=0;
+          blah=128;  
+        }
+      });
+      add(orange);
+      add(green);
+      add(yellow);
+    }
     
-    // create the labels
-    rValue = new JLabel("R: " + pixel.getRed());
-    gValue = new JLabel("G: " + pixel.getGreen());
-    bValue = new JLabel("B: " + pixel.getBlue());
-    
-    // create the sample color panel and label
-    colorLabel = new JLabel("Color at location: ");
-    colorPanel = new JPanel();
-    colorPanel.setBorder(new LineBorder(Color.black,1));
-    
-    // set the color sample to the pixel color
-    colorPanel.setBackground(pixel.getColor());
-    
-    // set the font
-    rValue.setFont(labelFont);
-    gValue.setFont(labelFont);
-    bValue.setFont(labelFont);
-    colorLabel.setFont(labelFont);
-    colorPanel.setPreferredSize(new Dimension(25,25));
-    
-    // add items to the color information panel
-    colorInfoPanel.add(rValue);
-    colorInfoPanel.add(gValue);
-    colorInfoPanel.add(bValue);
-    colorInfoPanel.add(colorLabel);
-    colorInfoPanel.add(colorPanel);
+    /*// create the labels
+     rValue = new JLabel("R: " + pixel.getRed());
+     gValue = new JLabel("G: " + pixel.getGreen());
+     bValue = new JLabel("B: " + pixel.getBlue());
+     
+     // create the sample color panel and label
+     colorLabel = new JLabel("Color at location: ");
+     colorPanel = new JPanel();
+     colorPanel.setBorder(new LineBorder(Color.black,1));
+     
+     // set the color sample to the pixel color
+     colorPanel.setBackground(pixel.getColor());
+     
+     // set the font
+     rValue.setFont(labelFont);
+     gValue.setFont(labelFont);
+     bValue.setFont(labelFont);
+     colorLabel.setFont(labelFont);
+     colorPanel.setPreferredSize(new Dimension(25,25));
+     
+     // add items to the color information panel
+     colorInfoPanel.add(rValue);
+     colorInfoPanel.add(gValue);
+     colorInfoPanel.add(bValue);
+     colorInfoPanel.add(colorLabel);
+     colorInfoPanel.add(colorPanel);*/
     
     return colorInfoPanel; 
   }
@@ -389,7 +427,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    * Creates the North JPanel with all the pixel location
    * and color information
    */
-  private void createInfoPanel()
+  private void createInfoPanel(int colors)
   {
     // create the info panel and set the layout
     JPanel infoPanel = new JPanel();
@@ -400,17 +438,17 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
                                infoPanel.getFont().getStyle(),14);
     
     // create the pixel location panel
-    JPanel locationPanel = createLocationPanel(largerFont);
+    //JPanel locationPanel = createLocationPanel(largerFont);
     
     // create the color information panel
-    JPanel colorInfoPanel = createColorInfoPanel(largerFont);
+    JPanel colorInfoPanel = createColorInfoPanel(largerFont, colors);
     
     // add the panels to the info panel
-    infoPanel.add(BorderLayout.NORTH,locationPanel);
+    //infoPanel.add(BorderLayout.NORTH,locationPanel);
     infoPanel.add(BorderLayout.SOUTH,colorInfoPanel); 
     
     // add the info panel
-    pictureFrame.getContentPane().add(BorderLayout.NORTH,infoPanel);
+    //pictureFrame.getContentPane().add(BorderLayout.NORTH,infoPanel);
   } 
   
   /**
@@ -486,10 +524,6 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   /**
    * Repaints the image on the scrollpane.  
    */
-  public void repaint()
-  {
-    pictureFrame.repaint();
-  }
   
   //****************************************//
   //               Event Listeners          //
@@ -514,14 +548,13 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   private boolean isLocationInPicture(int column, int row)
   {
+    boolean result = false; // the default is false
     if (column >= 0 && column < picture.getWidth() &&
         row >= 0 && row < picture.getHeight())
-      return true;
+      result = true;
     
-    return false;
+    return result;
   }
-  
-  
   Pixel[][] pixels= new Pixel[5000][5000];
   public void createPixel()
   {
@@ -593,13 +626,23 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   }
   private void colour (MouseEvent e)
   {
+    Color color = new Color(rad, grad, blah);
     createPixel();
-    if (isLocationInPicture(e.getX(), e.getY()))
-      colour(e.getX(), e.getY());
+    if (isLocationInPicture(e.getX(),e.getY())) {
+      if (color.getRGB() == colImg.getRGB(e.getX(), e.getY()) && color.getRGB() != bimg.getRGB(e.getX(), e.getY())) {
+        colour (e.getX(),e.getY(), color);
+        count++;
+      } else {
+        Driver.error("Sorry, that is the wrong colour, try again!", "WrongColourException");
+      }
+    }
+    if (count == 22) {
+      System.out.println("Pic completed");
+    }
   }
   
-  public void colour(int initialX, int initialY){
-    Color color = new Color(rad, grad, blah);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  public void colour(int initialX, int initialY, Color color){
     Color currentCol;
     Stack<Point> points = new Stack<Point>();
     points.add(new Point(initialX, initialY));
@@ -608,25 +651,24 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
       Point currentPoint = points.pop();
       int x = currentPoint.x;
       int y = currentPoint.y;
-      
-      currentCol = new Color(pixels[x][y].getRed(), pixels[x][y].getGreen(), pixels[x][y].getBlue());
-      int current = currentCol.getRGB();
-      if((current != Color.BLACK.getRGB()) && (current != color.getRGB())){
-        pixels[x][y].setRed(rad);
-        pixels[x][y].setGreen(grad);
-        pixels[x][y].setBlue(blah);
-        
-        repaint();
-        
-        points.push(new Point(x+1, y));
-        points.push(new Point(x-1, y));
-        points.push(new Point(x, y+1));
-        points.push(new Point(x, y-1));
+      if (isLocationInPicture(x, y)) {
+        currentCol = new Color(pixels[x][y].getRed(), pixels[x][y].getGreen(), pixels[x][y].getBlue());
+        int current = currentCol.getRGB();
+        if((current != Color.BLACK.getRGB()) && (current != color.getRGB())){
+          pixels[x][y].setRed(rad);
+          pixels[x][y].setGreen(grad);
+          pixels[x][y].setBlue(blah);
+          
+          repaint();
+          
+          points.push(new Point(x+1, y));
+          points.push(new Point(x-1, y));
+          points.push(new Point(x, y+1));
+          points.push(new Point(x, y-1));
+        }
       }
     }
   }
-  
-  
   /**
    * Method to display pixel information based on a mouse event
    * @param e a mouse event
@@ -677,7 +719,7 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
   public void mouseClicked(MouseEvent e)
   {
     //displayPixelInformation(e);
-    //colour(e);
+    colour(e);
   }
   
   /**
@@ -695,9 +737,6 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   public void mouseReleased(MouseEvent e)
   {
-    createPixel();
-    if (isLocationInPicture(e.getX(),e.getY()))
-      colour (e.getX(),e.getY());
   }
   
   /**
@@ -766,13 +805,4 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
     }
   }
   
-  /**
-   * Test Main.  It will explore the beach 
-   */
-  public static void main( String args[])
-  {
-    Picture pic = new Picture("TeddyBear.png");
-    pic.explore();
   }
-  
-}

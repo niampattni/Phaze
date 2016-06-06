@@ -44,8 +44,6 @@ public class SimplePicture implements DigitalPicture
    */
   private String extension;
   
-  private PictureExplorer explorer;
-  
  
  /////////////////////// Constructors /////////////////////////
  
@@ -135,10 +133,6 @@ public class SimplePicture implements DigitalPicture
    title = "None";
    fileName = "None";
    extension = "jpg";
- }
- 
- public PictureExplorer getExplorer() {
-   return explorer;
  }
  
  ////////////////////////// Methods //////////////////////////////////
@@ -422,10 +416,10 @@ public class SimplePicture implements DigitalPicture
   * Method to open a picture explorer on a copy (in memory) of this 
   * simple picture
   */
- public void explore()
+ public PictureExplorer explore(int colors)
  {
    // create a copy of the current picture and explore it
-   explorer = new PictureExplorer(this);
+   return new PictureExplorer(new SimplePicture(this), colors);
  }
  
  /**
@@ -452,8 +446,31 @@ public class SimplePicture implements DigitalPicture
  public void loadOrFail(String fileName) throws IOException
  {
     // set the current picture's file name
-   this.fileName = fileName;   
-   bufferedImage = ImageIO.read(this.getClass().getResource(fileName));
+   this.fileName = fileName;
+   
+   // set the extension
+   int posDot = fileName.indexOf('.');
+   if (posDot >= 0)
+     this.extension = fileName.substring(posDot + 1);
+   
+   // if the current title is null use the file name
+   if (title == null)
+     title = fileName;
+   
+   File file = new File(this.fileName);
+
+   if (!file.canRead()) 
+   {
+     // try adding the media path 
+     file = new File(FileChooser.getMediaPath(this.fileName));
+     if (!file.canRead())
+     {
+       throw new IOException(this.fileName +
+                             " could not be opened. Check that you specified the path");
+     }
+   }
+   
+   bufferedImage = ImageIO.read(file);
  }
 
 

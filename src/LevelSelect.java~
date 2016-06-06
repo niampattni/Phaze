@@ -30,6 +30,7 @@ public class LevelSelect extends JPanel {
       int y = e.getY();
       if (x >= 540 && x <= 746 && y >= 116 && y <= 226) {
         System.out.println("Level 1");
+        Driver.changeScreens("LevelOne");
       } else if (x >= 843 && x <= 1011 && y >= 112 && y <= 201) {
         System.out.println("Level 2");
       } else if (x >= 208 && x <= 350 && y >= 121 && y <= 197) {
