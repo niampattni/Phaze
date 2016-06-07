@@ -6,11 +6,10 @@ public class Driver {
   
   public Driver() {
     frame.setSize(1200, 930);
-    frame.getContentPane().removeAll();
-    frame.getContentPane().add(new MainMenu());
     frame.setVisible(true);
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Driver.changeScreens("MainMenu");
   }
   
   public static void changeScreens(String className) {

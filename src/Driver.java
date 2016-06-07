@@ -8,8 +8,8 @@ public class Driver {
     frame.setSize(1200, 930);
     frame.setVisible(true);
     frame.setResizable(false);
+    frame.add(new SplashScreen());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    Driver.changeScreens("MainMenu");
   }
   
   public static void changeScreens(String className) {
