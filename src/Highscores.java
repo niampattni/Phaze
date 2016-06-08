@@ -8,6 +8,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
   ArrayList<Score> list = new ArrayList<Score>();
   JButton print = new JButton ("Print");
   JButton back = new JButton ("Back");
+  JLabel title = new JLabel("Highscores");
   JLabel [] labels = new JLabel [10];
   int count =0;  
   public Highscores(){
@@ -59,6 +60,8 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     layout.putConstraint(SpringLayout.NORTH,print,100,SpringLayout.NORTH,this);
     layout.putConstraint(SpringLayout.WEST,back,0,SpringLayout.WEST,print);
     layout.putConstraint(SpringLayout.NORTH,back,20,SpringLayout.SOUTH,print);
+    layout.putConstraint(SpringLayout.WEST,title,300,SpringLayout.WEST,this);
+    layout.putConstraint(SpringLayout.NORTH,title,50,SpringLayout.NORTH,this);
     if (labels[0]!=null){
     layout.putConstraint(SpringLayout.WEST,labels[0],100,SpringLayout.WEST,this);
     layout.putConstraint(SpringLayout.NORTH,labels[0],100,SpringLayout.NORTH,this);}
@@ -89,7 +92,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     if (labels[9]!=null){
     layout.putConstraint(SpringLayout.WEST,labels[9],0,SpringLayout.WEST,labels[8]);
     layout.putConstraint(SpringLayout.NORTH,labels[9],20,SpringLayout.SOUTH,labels[8]);}
-    
+    this.add(title);
     print.addActionListener(this);
     back.addActionListener(this);
     for (int x=0;x<count;x++)
@@ -147,5 +150,4 @@ public class Highscores extends JPanel implements Printable,ActionListener{
       array.set(i+1,score);
     }
   }
-  
 }
