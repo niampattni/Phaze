@@ -36,7 +36,7 @@ public class GameTimer implements ActionListener{
   {
     JFrame frame = new JFrame();
     frame.setLayout(new FlowLayout());
-    GameTimer t = new GameTimer(30);
+    final GameTimer t = new GameTimer(30);
     frame.setSize(640,500);
     JButton start = new JButton("Start");
     JButton pause = new JButton ("Pause");

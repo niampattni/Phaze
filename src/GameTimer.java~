@@ -9,6 +9,7 @@ public class GameTimer implements ActionListener{
   
   public GameTimer(int startTime){
     this.startTime=startTime;
+    clock.setText(""+time);
   }
   public void actionPerformed(ActionEvent ae){
     time--;
