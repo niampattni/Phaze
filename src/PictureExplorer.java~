@@ -124,10 +124,6 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
   {
     pictureFrame = new JPanel(); // create the JFrame
     pictureFrame.setSize(1200, 930);
-    //pictureFrame.setResizable(false);  // allow the user to resize it
-    //pictureFrame.getContentPane().setLayout(new BorderLayout()); // use border layout
-    //pictureFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // when close stop
-    //pictureFrame.setTitle("Game Window");
     PictureExplorerFocusTraversalPolicy newPolicy = new PictureExplorerFocusTraversalPolicy();
     pictureFrame.setFocusTraversalPolicy(newPolicy);
     
@@ -143,7 +139,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     bimg = picture.getBufferedImage();
     
     try {
-      colImg = ImageIO.read(this.getClass().getResource("TeddyBearC.png"));
+      colImg = ImageIO.read(this.getClass().getResource(Images.names[Images.current] + Images.level + ".png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -331,7 +327,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
                                {
       public void actionPerformed(ActionEvent e)
       {
-        rad=0;
+        rad=255;
         grad=255;
         blah=0;
       }
@@ -636,8 +632,8 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
         Driver.error("Sorry, that is the wrong colour, try again!", "WrongColourException");
       }
     }
-    if (count == 22) {
-      System.out.println("Pic completed");
+    if (count == Images.completion[Images.current]) {
+      Images.completed = false;
     }
   }
   

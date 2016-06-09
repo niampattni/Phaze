@@ -11,13 +11,15 @@ public class LevelThree extends JPanel {
   int colors = 3;
   
   public LevelThree() {
+    remove(Images.panel);
     try {
-      blankImage = ImageIO.read(this.getClass().getResource("TeddyBear.png"));
+      blankImage = ImageIO.read(this.getClass().getResource(Images.names[Images.current] + ".png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
     pic = new Picture(blankImage);
-    add(pic.explore(colors));
+    Images.panel = pic.explore(colors);
+    add(Images.panel);
   }
   
 }

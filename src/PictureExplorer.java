@@ -628,12 +628,17 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
       if (color.getRGB() == colImg.getRGB(e.getX(), e.getY()) && color.getRGB() != bimg.getRGB(e.getX(), e.getY())) {
         colour (e.getX(),e.getY(), color);
         count++;
-      } else {
+      } else if (color.getRGB() != colImg.getRGB(e.getX(), e.getY())) {
         Driver.error("Sorry, that is the wrong colour, try again!", "WrongColourException");
       }
     }
     if (count == Images.completion[Images.current]) {
-      Images.completed = false;
+      if (Images.current < Images.names.length - 1) {
+        LevelSelect.listener.mouseReleased(e);
+      } else {
+        Images.current = -1;
+        Driver.changeScreens("MainMenu");
+      }
     }
   }
   

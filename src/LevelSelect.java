@@ -7,6 +7,9 @@ import java.io.*;
 public class LevelSelect extends JPanel {
   
   BufferedImage bImg;
+  static int x;
+  static int y;
+  static boolean clicked = false;
   
   public LevelSelect() {
     JLabel bg;
@@ -17,25 +20,25 @@ public class LevelSelect extends JPanel {
     }
     bg = new JLabel(new ImageIcon(bImg));
     add(bg);
-    bg.addMouseListener(listener);
+    bg.addMouseListener(LevelSelect.listener);
   }
   
-  MouseListener listener = new MouseListener() {
+  static MouseListener listener = new MouseListener() {
     public void mouseClicked(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {
-      int x = e.getX();
-      int y = e.getY();
+      if (!clicked) {
+        x = e.getX();
+        y = e.getY();
+      }
+      clicked = true;
       if (x >= 540 && x <= 746 && y >= 116 && y <= 226) {
         System.out.println("Level 1");
         Images.level = 1;
-        for (int i = 0; i < Images.names.length; i++) {
-          Images.current = i;
-          Driver.changeScreens("LevelOne");
-        }
-        System.out.println("All completed");
+        Images.current++;
+        Driver.changeScreens("LevelOne");
       } else if (x >= 843 && x <= 1011 && y >= 112 && y <= 201) {
         System.out.println("Level 2");
         Driver.changeScreens("LevelTwo");
