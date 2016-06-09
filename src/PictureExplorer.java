@@ -642,7 +642,10 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     }
   }
   
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @author somebody on StackOverflow modified by Niam Pattni to some extent
+   */
   public void colour(int initialX, int initialY, Color color){
     Color currentCol;
     Stack<Point> points = new Stack<Point>();
