@@ -1,9 +1,11 @@
 import java.awt.*;
 import java.awt.print.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import javax.imageio.*;
 public class Highscores extends JPanel implements Printable,ActionListener{
   ArrayList<Score> list = new ArrayList<Score>();
   JButton print = new JButton ("Print");
@@ -11,6 +13,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
   JLabel title = new JLabel("Highscores");
   JLabel [] labels = new JLabel [10];
   int temp =0;
+  BufferedImage logo;
   
   public Highscores(){
     SpringLayout layout = new SpringLayout();
@@ -81,7 +84,12 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     Graphics2D g2d = (Graphics2D)g;
     g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
     g.drawString("Highscores",150,100);
-    //ADD D LOGOOOOOOOOOOOOOOOOOOOOOOOOOg.drawImage();
+    try {
+      logo = ImageIO.read(this.getClass().getResource("logo.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    g.drawImage(logo, 250, 100, 116, 67, this);
     for (int x=0;x<temp;x++)
     {
       g.drawString(""+(x+1)+". "+list.get(x).toString(),150,150+50*x);

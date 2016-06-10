@@ -10,45 +10,18 @@ public class Highscores extends JPanel implements Printable,ActionListener{
   JButton back = new JButton ("Back");
   JLabel title = new JLabel("Highscores");
   JLabel [] labels = new JLabel [10];
-  int count =0;  
+  int temp =0;
+  
   public Highscores(){
     SpringLayout layout = new SpringLayout();
-    try{
-      BufferedReader in = new BufferedReader(new FileReader("Highscores.txt"));
-      while (true)
-      {
-        String line = in.readLine();
-        if (line==null)
-        {
-          break;
-        }
-        count++;
-        String name="";
-        int nameend=0;
-        int score=0;
-        
-        for (int x=0;x<line.length();x++)
-        {
-          if (line.charAt(x)==' ')
-            nameend=x;
-        }
-        name = line.substring(0,nameend);
-        try{
-          score = Integer.parseInt(line.substring(nameend+1,line.length()));
-          
-        }
-        catch(NumberFormatException ef){
-        }
-        list.add(new Score(score,name));
-      }
+    getScores(list);
+    if (list.size()<10)
+      temp=list.size();
+    else
+      temp=10;
       
-    }
-    catch(IOException e){
-    }
-    if (count>10)
-      count=10;
     sortScores(list);
-    for (int x=0;x<count;x++)
+    for (int x=0;x<temp;x++)
     {
       labels[x]=new JLabel(list.get(x).toString());
     }   
@@ -95,7 +68,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     this.add(title);
     print.addActionListener(this);
     back.addActionListener(this);
-    for (int x=0;x<count;x++)
+    for (int x=0;x<temp;x++)
       this.add(labels[x]);
     this.add(print);
     this.add(back);
@@ -109,7 +82,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
     g.drawString("Highscores",150,100);
     //ADD D LOGOOOOOOOOOOOOOOOOOOOOOOOOOg.drawImage();
-    for (int x=0;x<count;x++)
+    for (int x=0;x<temp;x++)
     {
       g.drawString(""+(x+1)+". "+list.get(x).toString(),150,150+50*x);
     }
@@ -134,6 +107,41 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     {
       Driver.changeScreens("MainMenu");
     }
+  }
+  
+  public static ArrayList<Score> getScores(ArrayList<Score> list){
+    try{
+      BufferedReader in = new BufferedReader(new FileReader("Highscores.txt"));
+      while (true)
+      {
+        String line = in.readLine();
+        if (line==null)
+        {
+          break;
+        }
+        String name="";
+        int nameend=0;
+        int score=0;
+        
+        for (int x=0;x<line.length();x++)
+        {
+          if (line.charAt(x)==' ')
+            nameend=x;
+        }
+        name = line.substring(0,nameend);
+        try{
+          score = Integer.parseInt(line.substring(nameend+1,line.length()));
+          
+        }
+        catch(NumberFormatException ef){
+        }
+        list.add(new Score(score,name));
+      }
+      
+    }
+    catch(IOException e){
+    }
+    return list;
   }
   
   
