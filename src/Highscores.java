@@ -228,7 +228,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
    * while loop is used to check the array
    * @param array the arraylist to be sorted
    */
-  private void sortScores(ArrayList <Score> array) {
+  public static void sortScores(ArrayList <Score> array) {
     int n = array.size();
     for (int j = 1; j < n; j++) {
       int key = array.get(j).getScore();

@@ -105,7 +105,10 @@ public class MainMenu extends JPanel implements ActionListener {
     if(e.getActionCommand().equals("Confirm")) {
       Driver.username = input.getText();
       dialog.dispose();
-      System.out.println(Driver.username);
+      if (Driver.username.equals("") || Driver.username == null || Driver.username.length() > 8) {
+        Driver.error("Please enter a username with a max length of 8 characters", "Username not Legal");
+        usernameDialog();
+      }
       Driver.frame.removeKeyListener(kListener);
       Driver.changeScreens("LevelSelect");
     }

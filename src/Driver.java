@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
 
 /**
  * The Driver class is responsible for controlling the flow of the entire
@@ -26,6 +28,7 @@ public class Driver {
   public static JFrame frame = new JFrame("Paint Me a Picture");
   public static String username;
   public static int score = 1000;
+  public static BufferedImage logo;
   
   /**
    * The constructor sets up the JFrame and main KeyListener. It sets the size
@@ -39,12 +42,17 @@ public class Driver {
     frame.setResizable(false);
     frame.add(new SplashScreen());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    try {
+      logo = ImageIO.read(this.getClass().getResource("images\\logo.png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     frame.addKeyListener(new KeyListener() {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
           try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler PaintMeAPicture.chm");
-          } catch (IOException ioe) {}
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler CHM\\PaintMeAPicture.chm");
+          } catch (Exception ex) {}
         }
       }
       public void keyTyped(KeyEvent e) {}
@@ -71,7 +79,7 @@ public class Driver {
     try {
       c = Class.forName(className);
       frame.getContentPane().removeAll();
-      frame.getContentPane().add( (JPanel) c.newInstance());
+      frame.getContentPane().add((JPanel) c.newInstance());
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     } catch (InstantiationException ie) {

@@ -686,7 +686,9 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
         temp.add(new Score(Driver.score,Driver.username,"level "+Images.level));
         try{
           PrintWriter output = new PrintWriter(new FileWriter("Highscores.phze"));
-          for (int x=0;x<temp.size();x++)
+          output.println(Highscores.header);
+          Highscores.sortScores(temp);
+          for (int x=0;x<10;x++)
           {
             output.println(temp.get(x).toString());
           }
