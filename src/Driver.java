@@ -39,17 +39,17 @@ public class Driver {
     frame.setResizable(false);
     frame.add(new SplashScreen());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  }
-  
-  /**
-   * The openCHM() method is called when the F1 key is pressed at any point
-   * in the program. It uses a Runtime exec to open the CHM file and catches
-   * the IOException.
-   */
-  private void openCHM() {
-    try {
-      Runtime.getRuntime().exec("hh.exe PaintMeAPicture.chm");
-    } catch (IOException ioe) {}
+    frame.addKeyListener(new KeyListener() {
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_F1) {
+          try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler PaintMeAPicture.chm");
+          } catch (IOException ioe) {}
+        }
+      }
+      public void keyTyped(KeyEvent e) {}
+      public void keyReleased(KeyEvent e) {}
+    });
   }
   
   /**
