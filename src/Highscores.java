@@ -89,7 +89,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     } catch (IOException e) {
       e.printStackTrace();
     }
-    g.drawImage(logo, 250, 100, 116, 67, this);
+    g.drawImage(logo, 300, 100, 116, 67, this);
     for (int x=0;x<temp;x++)
     {
       g.drawString(""+(x+1)+". "+list.get(x).toString(),150,150+50*x);
