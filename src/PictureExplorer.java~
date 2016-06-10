@@ -138,6 +138,8 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     
     bimg = picture.getBufferedImage();
     
+    setOpaque(false);
+    
     try {
       colImg = ImageIO.read(this.getClass().getResource(Images.names[Images.current] + Images.level + ".png"));
     } catch (IOException e) {
@@ -153,6 +155,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     JPanel panel = new JPanel(new FlowLayout());
     panel.add(imageDisplay);
     panel.add(colDisplay);
+    panel.setOpaque(false);
     add(panel);
     add(Images.timer.clock);
   }
@@ -654,7 +657,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     if (count == Images.completion[Images.current]) {
       if (Images.current < Images.names.length - 1) {
         Images.timer.pause();
-        Driver.score -= (30 - Images.timer.getTime());
+        Driver.score -= (Images.timer.getStart() - Images.timer.getTime());
         LevelSelect.listener.mouseReleased(e);
       } else {
         Images.current = -1;
@@ -672,6 +675,8 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
           output.close();
         }
         catch(IOException ie){}
+        Driver.frame.setSize(1200, 900);
+        Images.timer.stop();
         Driver.changeScreens("MainMenu");
       }
     }

@@ -665,7 +665,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
         JOptionPane.showMessageDialog(null, "Your score is " + Driver.score, "Score", JOptionPane.INFORMATION_MESSAGE);
         ArrayList <Score> temp = new ArrayList<Score>();
         Highscores.getScores(temp);
-        temp.add(new Score(Driver.score,Driver.username));
+        temp.add(new Score(Driver.score,Driver.username,"level "+Images.level));
         try{
           PrintWriter output = new PrintWriter(new FileWriter("Highscores.txt"));
           for (int x=0;x<temp.size();x++)

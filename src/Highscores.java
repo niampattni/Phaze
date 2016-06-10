@@ -128,7 +128,9 @@ public class Highscores extends JPanel implements Printable,ActionListener{
           break;
         }
         String name="";
+        String level="";
         int nameend=0;
+        int levelend = 0;
         int score=0;
         
         for (int x=0;x<line.length();x++)
@@ -137,13 +139,18 @@ public class Highscores extends JPanel implements Printable,ActionListener{
             nameend=x;
         }
         name = line.substring(0,nameend);
+        for (int x=nameend;x<line.length();x++)
+        {
+          if (line.charAt(x)==' ')
+            levelend=x;
+        }
+        level=line.substring(nameend,levelend);
         try{
-          score = Integer.parseInt(line.substring(nameend+1,line.length()));
-          
+          score = Integer.parseInt(line.substring(levelend+1,line.length()));
         }
         catch(NumberFormatException ef){
         }
-        list.add(new Score(score,name));
+        list.add(new Score(score,name,level));
       }
       
     }
