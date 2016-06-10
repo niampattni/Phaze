@@ -39,15 +39,6 @@ public class Driver {
     frame.setResizable(false);
     frame.add(new SplashScreen());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.addKeyListener(new KeyListener() {
-      public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_F1) {
-          openCHM();
-        }
-      }
-      public void keyTyped(KeyEvent e) {}
-      public void keyReleased(KeyEvent e) {}
-    });
   }
   
   /**

@@ -38,7 +38,26 @@ public class MainMenu extends JPanel implements ActionListener {
     bg = new JLabel(new ImageIcon(bImg));
     add(bg);
     bg.addMouseListener(listener);
+    Driver.frame.addKeyListener(kListener);
   }
+  
+  KeyListener kListener = new KeyListener() {
+    public void keyPressed(KeyEvent e) {
+      if (e.getKeyChar() == 'p') {
+        usernameDialog();
+      } else if (e.getKeyChar() == 's') {
+        Driver.frame.removeKeyListener(this);
+        Driver.changeScreens("Highscores");
+      } else if (e.getKeyChar() == 'i') {
+        Driver.frame.removeKeyListener(this);
+        System.out.println("Instructions");
+      } else if (e.getKeyChar() == 'e') {
+        System.exit(0);
+      }
+    }
+    public void keyTyped(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
+  };
   
   MouseListener listener = new MouseListener() {
     public void mouseClicked(MouseEvent e) {}
@@ -87,6 +106,7 @@ public class MainMenu extends JPanel implements ActionListener {
       Driver.username = input.getText();
       dialog.dispose();
       System.out.println(Driver.username);
+      Driver.frame.removeKeyListener(kListener);
       Driver.changeScreens("LevelSelect");
     }
   }

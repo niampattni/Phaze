@@ -4,19 +4,19 @@ import java.awt.image.*;
 import java.awt.event.*;
 import javax.imageio.*;
 import java.io.*;
-  /**
-   * This class creates the level select screen
-   * <b> Variables </b>
-   * <b>x </b> stores the x coordinate where the user has clicked
-   * <p>
-   * <b>y </b> stores the y coordinate where the user has clicked
-   * <p>
-   * <b> bImg </b> will store the background
-   * <p>
-   * <b> clicked </b> boolean variable that stores if the user has clicked
-   * @author Phaze Inc.
-   * @version FINAL - June 10 2016
-   */ 
+/**
+ * This class creates the level select screen
+ * <b> Variables </b>
+ * <b>x </b> stores the x coordinate where the user has clicked
+ * <p>
+ * <b>y </b> stores the y coordinate where the user has clicked
+ * <p>
+ * <b> bImg </b> will store the background
+ * <p>
+ * <b> clicked </b> boolean variable that stores if the user has clicked
+ * @author Phaze Inc.
+ * @version FINAL - June 10 2016
+ */ 
 public class LevelSelect extends JPanel {
   
   BufferedImage bImg;
@@ -39,7 +39,35 @@ public class LevelSelect extends JPanel {
     bg = new JLabel(new ImageIcon(bImg));
     add(bg);
     bg.addMouseListener(LevelSelect.listener);
+    if (!clicked) {
+      Driver.frame.addKeyListener(kListener);
+    }
   }
+  
+  private void makeClick(int level) {
+    if (level == 1) {
+      LevelSelect.listener.mouseReleased(new MouseEvent(this, 0, 0, 0, 550, 126, 1, false));
+    } else if (level == 2) {
+      LevelSelect.listener.mouseReleased(new MouseEvent(this, 0, 0, 0, 853, 122, 1, false));
+    } else {
+      LevelSelect.listener.mouseReleased(new MouseEvent(this, 0, 0, 0, 308, 131, 1, false));
+    }
+  }
+  
+  KeyListener kListener = new KeyListener() {
+    public void keyPressed(KeyEvent e) {
+      Driver.frame.removeKeyListener(this);
+      if (e.getKeyChar() == '1') {
+        makeClick(1);
+      } else if (e.getKeyChar() == '2') {
+        makeClick(2);
+      } else if (e.getKeyChar() == '3') {
+        makeClick(3);
+      }
+    }
+    public void keyTyped(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
+  };
   
   static MouseListener listener = new MouseListener() {
     public void mouseClicked(MouseEvent e) {}
@@ -56,19 +84,19 @@ public class LevelSelect extends JPanel {
         System.out.println("Level 1");
         Images.level = 1;
         Images.current++;
-        Images.timer = new GameTimer(30);
+        Images.timer = new GameTimer(40);
         Driver.changeScreens("LevelOne");
       } else if (x >= 843 && x <= 1011 && y >= 112 && y <= 201) {
         System.out.println("Level 2");
         Images.level = 2;
         Images.current++;
-        Images.timer = new GameTimer(45);
+        Images.timer = new GameTimer(50);
         Driver.changeScreens("LevelTwo");
       } else if (x >= 208 && x <= 350 && y >= 121 && y <= 197) {
         System.out.println("Level 3");
         Images.level = 3;
         Images.current++;
-        Images.timer = new GameTimer(45);
+        Images.timer = new GameTimer(55);
         Driver.changeScreens("LevelThree");
       }
     }

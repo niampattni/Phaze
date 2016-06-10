@@ -161,7 +161,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
    * a try catch block is used for fileIO
    * @param list the arraylist where the arraylist will be stored
    */
-  public static ArrayList<Score> getScores(ArrayList<Score> list){
+  public static ArrayList <Score> getScores(ArrayList<Score> list){
     try{
       BufferedReader in = new BufferedReader(new FileReader("Highscores.txt"));
       while (true)

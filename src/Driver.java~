@@ -71,7 +71,7 @@ public class Driver {
    * <p>
    * <b>Local Variables: </b>
    * <p>
-   * <b>c </b> Creates an instance of the Class<?> variables based on a Class input.
+   * <b> c </b> Creates an instance of the Class variables based on a Class input.
    * @param className Instance of the String class representing another class
    * in the program.
    */

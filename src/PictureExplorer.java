@@ -679,6 +679,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
       } else {
         Images.current = -1;
         LevelSelect.clicked = false;
+        Driver.score *= Images.level;
         JOptionPane.showMessageDialog(null, "Your score is " + Driver.score, "Score", JOptionPane.INFORMATION_MESSAGE);
         ArrayList <Score> temp = new ArrayList<Score>();
         Highscores.getScores(temp);

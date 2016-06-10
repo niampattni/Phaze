@@ -4,12 +4,30 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
 import javax.imageio.*;
+  /**
+   * The main menu class creates the main menu screen 
+   * <b> Variables </b>
+   * <p>
+   * <b> bImg </b> holds the background of the screen
+   * <p>
+   * <b> input </b> will take the user's input for their username
+   * <p>
+   * <b> dialog </b> creates the dialog window that asks for the username
+   * @author Phaze Inc.
+   * @version FINAL - June 10 2016
+   */
 public class MainMenu extends JPanel implements ActionListener {
   
   BufferedImage bImg;
   JTextField input;
   JDialog dialog;
-  
+  /**
+   * The class constructor creates the JPanel and reads in the background image
+   * try catch block is used for file io when reading in background image
+   * <b> Variables </b>
+   * <p>
+   * <b> bg </b> the background
+   */
   public MainMenu() {
     JLabel bg;
     try {
@@ -41,7 +59,9 @@ public class MainMenu extends JPanel implements ActionListener {
       }
     }
   };
-  
+  /**
+   * This method creates a dialog window to ask the user for their username
+   */
   public void usernameDialog() {
     dialog = new JDialog();
     dialog.setSize(500, 100);
@@ -57,7 +77,11 @@ public class MainMenu extends JPanel implements ActionListener {
     dialog.setLocationRelativeTo(this);
     dialog.setVisible(true);
   }
-  
+  /**
+   * This method overrides the actionPerformed method in ActionListener
+   * an if statement is used to check when the user has clicked confirm
+   * @param e the action the user performed
+   */
   public void actionPerformed(ActionEvent e) {
     if(e.getActionCommand().equals("Confirm")) {
       Driver.username = input.getText();
@@ -66,7 +90,10 @@ public class MainMenu extends JPanel implements ActionListener {
       Driver.changeScreens("LevelSelect");
     }
   }
-  
+  /**
+   * This method draws the background onto the screen
+   * @param g the graphics of the screen
+   */
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(bImg, 0, 0, this);

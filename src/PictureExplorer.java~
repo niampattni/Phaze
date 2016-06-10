@@ -707,7 +707,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
    * prevents StackOverflowError.
    * @param initialX Starting x coordinate for the fill.
    * @param initialY Starting y coordinate for the fill.
-   * @param colour Instance of the Color class, color to fill wih.
+   * @param color Instance of the Color class, color to fill wih.
    * @author anonymous user from StackOverflow modified by Phaze Inc.
    */
   public void colour(int initialX, int initialY, Color color){
