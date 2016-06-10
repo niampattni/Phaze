@@ -16,16 +16,19 @@ public class Driver {
     frame.addKeyListener(new KeyListener() {
       public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_F1) {
-          System.out.println("F1");
-          try {
-            System.out.println("Pressed");
-            Runtime.getRuntime().exec("C:\\Windows\\hh.exe PaintMeAPicture.chm");
-          } catch (IOException ioe) {}
+          openCHM();
         }
       }
       public void keyTyped(KeyEvent e) {}
       public void keyReleased(KeyEvent e) {}
     });
+  }
+  
+  private void openCHM() {
+    String path = "hh.exe PaintMeAPicture.chm";
+    try {
+      Runtime.getRuntime().exec(path);
+    } catch (IOException ioe) {}
   }
   
   public static void changeScreens(String className) {

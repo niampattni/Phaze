@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
 public class Driver {
   
   public static JFrame frame = new JFrame("Game Window");
@@ -11,6 +13,19 @@ public class Driver {
     frame.setResizable(false);
     frame.add(new SplashScreen());
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.addKeyListener(new KeyListener() {
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_F1) {
+          System.out.println("F1");
+          try {
+            System.out.println("Pressed");
+            Runtime.getRuntime().exec("C:\\Windows\\hh.exe PaintMeAPicture.chm");
+          } catch (IOException ioe) {}
+        }
+      }
+      public void keyTyped(KeyEvent e) {}
+      public void keyReleased(KeyEvent e) {}
+    });
   }
   
   public static void changeScreens(String className) {
