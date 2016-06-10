@@ -3,6 +3,7 @@ public class Driver {
   
   public static JFrame frame = new JFrame("Game Window");
   public static String username;
+  public static int score = 1000;
   
   public Driver() {
     frame.setSize(1200, 930);

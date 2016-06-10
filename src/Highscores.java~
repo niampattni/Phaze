@@ -50,7 +50,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     sortScores(list);
     for (int x=0;x<count;x++)
     {
-     labels[x]=new JLabel(list.get(x).toString());
+      labels[x]=new JLabel(list.get(x).toString());
     }   
     
     this.setLayout(layout);
@@ -63,35 +63,35 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     layout.putConstraint(SpringLayout.WEST,title,300,SpringLayout.WEST,this);
     layout.putConstraint(SpringLayout.NORTH,title,50,SpringLayout.NORTH,this);
     if (labels[0]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[0],100,SpringLayout.WEST,this);
-    layout.putConstraint(SpringLayout.NORTH,labels[0],100,SpringLayout.NORTH,this);}
+      layout.putConstraint(SpringLayout.WEST,labels[0],100,SpringLayout.WEST,this);
+      layout.putConstraint(SpringLayout.NORTH,labels[0],100,SpringLayout.NORTH,this);}
     if (labels[1]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[1],0,SpringLayout.WEST,labels[0]);
-    layout.putConstraint(SpringLayout.NORTH,labels[1],20,SpringLayout.SOUTH,labels[0]);}
+      layout.putConstraint(SpringLayout.WEST,labels[1],0,SpringLayout.WEST,labels[0]);
+      layout.putConstraint(SpringLayout.NORTH,labels[1],20,SpringLayout.SOUTH,labels[0]);}
     if (labels[2]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[2],0,SpringLayout.WEST,labels[1]);
-    layout.putConstraint(SpringLayout.NORTH,labels[2],20,SpringLayout.SOUTH,labels[1]);}
+      layout.putConstraint(SpringLayout.WEST,labels[2],0,SpringLayout.WEST,labels[1]);
+      layout.putConstraint(SpringLayout.NORTH,labels[2],20,SpringLayout.SOUTH,labels[1]);}
     if (labels[3]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[3],0,SpringLayout.WEST,labels[2]);
-    layout.putConstraint(SpringLayout.NORTH,labels[3],20,SpringLayout.SOUTH,labels[2]);}
+      layout.putConstraint(SpringLayout.WEST,labels[3],0,SpringLayout.WEST,labels[2]);
+      layout.putConstraint(SpringLayout.NORTH,labels[3],20,SpringLayout.SOUTH,labels[2]);}
     if (labels[4]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[4],0,SpringLayout.WEST,labels[3]);
-    layout.putConstraint(SpringLayout.NORTH,labels[4],20,SpringLayout.SOUTH,labels[3]);}
+      layout.putConstraint(SpringLayout.WEST,labels[4],0,SpringLayout.WEST,labels[3]);
+      layout.putConstraint(SpringLayout.NORTH,labels[4],20,SpringLayout.SOUTH,labels[3]);}
     if (labels[5]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[5],0,SpringLayout.WEST,labels[4]);
-    layout.putConstraint(SpringLayout.NORTH,labels[5],20,SpringLayout.SOUTH,labels[4]);}
+      layout.putConstraint(SpringLayout.WEST,labels[5],0,SpringLayout.WEST,labels[4]);
+      layout.putConstraint(SpringLayout.NORTH,labels[5],20,SpringLayout.SOUTH,labels[4]);}
     if (labels[6]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[6],0,SpringLayout.WEST,labels[5]);
-    layout.putConstraint(SpringLayout.NORTH,labels[6],20,SpringLayout.SOUTH,labels[5]);}
+      layout.putConstraint(SpringLayout.WEST,labels[6],0,SpringLayout.WEST,labels[5]);
+      layout.putConstraint(SpringLayout.NORTH,labels[6],20,SpringLayout.SOUTH,labels[5]);}
     if (labels[7]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[7],0,SpringLayout.WEST,labels[6]);
-    layout.putConstraint(SpringLayout.NORTH,labels[7],20,SpringLayout.SOUTH,labels[6]);}
+      layout.putConstraint(SpringLayout.WEST,labels[7],0,SpringLayout.WEST,labels[6]);
+      layout.putConstraint(SpringLayout.NORTH,labels[7],20,SpringLayout.SOUTH,labels[6]);}
     if (labels[8]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[8],0,SpringLayout.WEST,labels[7]);
-    layout.putConstraint(SpringLayout.NORTH,labels[8],20,SpringLayout.SOUTH,labels[7]);}
+      layout.putConstraint(SpringLayout.WEST,labels[8],0,SpringLayout.WEST,labels[7]);
+      layout.putConstraint(SpringLayout.NORTH,labels[8],20,SpringLayout.SOUTH,labels[7]);}
     if (labels[9]!=null){
-    layout.putConstraint(SpringLayout.WEST,labels[9],0,SpringLayout.WEST,labels[8]);
-    layout.putConstraint(SpringLayout.NORTH,labels[9],20,SpringLayout.SOUTH,labels[8]);}
+      layout.putConstraint(SpringLayout.WEST,labels[9],0,SpringLayout.WEST,labels[8]);
+      layout.putConstraint(SpringLayout.NORTH,labels[9],20,SpringLayout.SOUTH,labels[8]);}
     this.add(title);
     print.addActionListener(this);
     back.addActionListener(this);
@@ -117,25 +117,25 @@ public class Highscores extends JPanel implements Printable,ActionListener{
   }
   
   public void actionPerformed(ActionEvent e)
+  {
+    if (e.getActionCommand().equals("Print"))
     {
-      if (e.getActionCommand().equals("Print"))
-      {
-        PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPrintable(this);
-        boolean ok = job.printDialog();
-        if (ok) {
-          try {
-            job.print();
-          } catch (PrinterException ex) {
-          }
+      PrinterJob job = PrinterJob.getPrinterJob();
+      job.setPrintable(this);
+      boolean ok = job.printDialog();
+      if (ok) {
+        try {
+          job.print();
+        } catch (PrinterException ex) {
         }
       }
-      else
-      {
-        Driver.changeScreens("MainMenu");
-      }
-      }
-
+    }
+    else
+    {
+      Driver.changeScreens("MainMenu");
+    }
+  }
+  
   
   private void sortScores(ArrayList <Score> array) {
     int n = array.size();

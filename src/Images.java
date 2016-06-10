@@ -5,4 +5,5 @@ public class Images {
   public static int level = 0;
   public static int current = -1;
   public static JPanel panel = new JPanel();
+  public static GameTimer timer = new GameTimer(30);
 }

@@ -154,6 +154,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     panel.add(imageDisplay);
     panel.add(colDisplay);
     add(panel);
+    add(Images.timer.clock);
   }
   
   /**
@@ -647,14 +648,19 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
         count++;
       } else if (color.getRGB() != colImg.getRGB(e.getX(), e.getY())) {
         Driver.error("Sorry, that is the wrong colour, try again!", "WrongColourException");
+        Driver.score -= 10;
       }
     }
     if (count == Images.completion[Images.current]) {
       if (Images.current < Images.names.length - 1) {
+        Images.timer.pause();
+        Driver.score -= (30 - Images.timer.getTime());
         LevelSelect.listener.mouseReleased(e);
       } else {
         Images.current = -1;
         LevelSelect.clicked = false;
+        JOptionPane.showMessageDialog(null, "Your score is " + Driver.score, "Score", JOptionPane.INFORMATION_MESSAGE);
+        
         Driver.changeScreens("MainMenu");
       }
     }
@@ -741,7 +747,6 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
   public void mouseClicked(MouseEvent e)
   {
     //displayPixelInformation(e);
-    colour(e);
   }
   
   /**
@@ -759,6 +764,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
    */
   public void mouseReleased(MouseEvent e)
   {
+    colour(e);
   }
   
   /**

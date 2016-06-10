@@ -19,5 +19,6 @@ public class LevelOne extends JPanel {
     pic = new Picture(blankImage);
     Images.panel = pic.explore();
     add(Images.panel);
+    Images.timer.start();
   }
 }
