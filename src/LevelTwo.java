@@ -36,8 +36,8 @@ public class LevelTwo extends JPanel {
   public LevelTwo() {
     remove(Images.panel);
     try {
-      blankImage = ImageIO.read(this.getClass().getResource(Images.names[Images.current] + ".png"));
-      bImg = ImageIO.read(this.getClass().getResource("Level2BG.png"));
+      blankImage = ImageIO.read(this.getClass().getResource("images\\" + Images.names[Images.current] + ".png"));
+      bImg = ImageIO.read(this.getClass().getResource("images\\Level2BG.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }

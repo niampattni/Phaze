@@ -17,7 +17,6 @@ import java.awt.event.*;
 */
 public class GameTimer implements ActionListener{
   private int time=0;
-  private int startTime=0;
   JLabel clock = new JLabel();
   Timer timer = new Timer(1000,this); 
   /**
@@ -25,25 +24,17 @@ public class GameTimer implements ActionListener{
    * JLabel
    * @param startTime chooses the start time the GameTimer will be given
    */
-  public GameTimer(int startTime){
-    this.startTime=startTime;
+  public GameTimer(){
     clock.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
     clock.setForeground(Color.WHITE);
     clock.setText(""+time);
-  }
-  /**
-   * This is a return method that will return the start time
-   * @return startTime the amount of time the player has until it gets to 0
-   */
-  public int getStart() {
-    return startTime;
   }
   /**
    * This overrides the actionPerformed method in ActionListener
    * @param ae what action is performed
    */
   public void actionPerformed(ActionEvent ae){
-    time--;
+    time++;
     clock.setText(""+time);
   }
   /**
@@ -60,7 +51,6 @@ public class GameTimer implements ActionListener{
    */
   public void start()
   {
-    time=startTime;
     timer.start();
   }
   /**
@@ -81,41 +71,4 @@ public class GameTimer implements ActionListener{
    * method only for testing the timer
    * @param args String array
    */ 
-  public static void main (String [] args)
-  {
-    JFrame frame = new JFrame();
-    frame.setLayout(new FlowLayout());
-    final GameTimer t = new GameTimer(30);
-    frame.setSize(640,500);
-    JButton start = new JButton("Start");
-    JButton pause = new JButton ("Pause");
-    JButton stop = new JButton("Stop");
-    start.addActionListener(new ActionListener ( )
-                              {
-      public void actionPerformed (ActionEvent e)
-      {
-        t.start();
-      } } ) ;
-    pause.addActionListener(new ActionListener ( )
-                              {
-      public void actionPerformed (ActionEvent e)
-      {
-        t.pause();
-      } } ) ;
-    
-    stop.addActionListener(new ActionListener ( )
-                             {
-      public void actionPerformed (ActionEvent e)
-      {
-        t.stop();
-        t.clock.setText(""+t.getTime());
-      } } ) ;
-    frame.add(start);
-    frame.add(pause);
-    frame.add(stop);
-    
-    frame.add(t.clock);
-    SwingUtilities.updateComponentTreeUI(frame);
-    frame.setVisible(true);
-  }
 }

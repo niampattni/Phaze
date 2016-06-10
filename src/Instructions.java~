@@ -1,0 +1,25 @@
+public class Instructions extends JPanel {
+  BufferedImage image;
+  int current = 0;
+  public Instructions() {
+    JLabel label;
+    try {
+      image = ImageIO.read(this.getClass().getResource("images\\Instructions" + current + ".png"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    label = new JLabel(new ImageIcon(image));
+    add(label);
+    label.addMouseListener(listener);
+  }
+  
+  MouseListener listener = new MouseListener() {
+    public void mouseClicked(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+      
+    }
+  };
+}

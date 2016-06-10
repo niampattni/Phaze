@@ -118,7 +118,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
     g.drawString("Highscores",150,100);
     try {
-      logo = ImageIO.read(this.getClass().getResource("logo.png"));
+      logo = ImageIO.read(this.getClass().getResource("images\\logo.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -158,7 +158,6 @@ public void actionPerformed(ActionEvent e)
     job.setPrintable(this);
     boolean ok = job.printDialog();
     if (ok) {
-      Driver.frame.removeKeyListener(kListener);
       try {
         job.print();
       } catch (PrinterException ex) {

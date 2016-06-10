@@ -674,11 +674,12 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     if (count == Images.completion[Images.current]) {
       if (Images.current < Images.names.length - 1) {
         Images.timer.pause();
-        Driver.score -= (Images.timer.getStart() - Images.timer.getTime());
+        Driver.score -= Images.timer.getTime();
         LevelSelect.listener.mouseReleased(e);
       } else {
         Images.current = -1;
         LevelSelect.clicked = false;
+        Driver.score *= Images.level;
         JOptionPane.showMessageDialog(null, "Your score is " + Driver.score, "Score", JOptionPane.INFORMATION_MESSAGE);
         ArrayList <Score> temp = new ArrayList<Score>();
         Highscores.getScores(temp);

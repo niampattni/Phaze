@@ -32,7 +32,7 @@ public class LevelSelect extends JPanel {
   public LevelSelect() {
     JLabel bg;
     try {
-      bImg = ImageIO.read(this.getClass().getResource("LevelSelectBG.png"));
+      bImg = ImageIO.read(this.getClass().getResource("images\\LevelSelectBG.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -80,23 +80,21 @@ public class LevelSelect extends JPanel {
         y = e.getY();
       }
       clicked = true;
+      Images.timer = new GameTimer();
       if (x >= 540 && x <= 746 && y >= 116 && y <= 226) {
         System.out.println("Level 1");
         Images.level = 1;
         Images.current++;
-        Images.timer = new GameTimer(40);
         Driver.changeScreens("LevelOne");
       } else if (x >= 843 && x <= 1011 && y >= 112 && y <= 201) {
         System.out.println("Level 2");
         Images.level = 2;
         Images.current++;
-        Images.timer = new GameTimer(50);
         Driver.changeScreens("LevelTwo");
       } else if (x >= 208 && x <= 350 && y >= 121 && y <= 197) {
         System.out.println("Level 3");
         Images.level = 3;
         Images.current++;
-        Images.timer = new GameTimer(55);
         Driver.changeScreens("LevelThree");
       }
     }
