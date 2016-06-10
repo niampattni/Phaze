@@ -16,6 +16,6 @@ public class Score{
     return level;
   }
   public String toString(){
-    return name+" "+score+" "+level;
+    return name+" "+level+" "+score;
   }
 }
