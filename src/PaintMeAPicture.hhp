@@ -1,0 +1,36 @@
+[OPTIONS]
+Language=0x0409
+Default Font=Arial,8,0
+TITLE=PaintMeAPicture
+Full-text search=Yes
+Display compile notes=YES
+Display compile progress=YES
+Compatibility=1.1
+Auto Index=No
+Default Window=Main
+Compiled file=PaintMeAPicture.chm
+Error Log file=PaintMeAPicture.log
+Contents file=PaintMeAPicture.hhc
+Index File=PaintMeAPicture.hhk
+Default Topic=about.html
+[FILES]
+about.html
+credits.html
+tutorial.html
+Game.html
+playingthegame.html
+shortcuts.html
+help.png
+nexttopic.png
+prevtopic.png
+[WINDOWS]
+Main=,"PaintMeAPicture.hhc","PaintMeAPicture.hhk","about.html","about.html",,,,,0x061520,200,0x00304E,[50,50,850,450],0x307e,,,,,,,,0
+[ALIAS]
+about=about.html
+credits=credits.html
+tutorial=tutorial.html
+Game=Game.html
+playingthegame=playingthegame.html
+shortcuts=shortcuts.html
+[MAP]
+#include PaintMeAPicture.h
