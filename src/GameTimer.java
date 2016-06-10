@@ -9,7 +9,12 @@ public class GameTimer implements ActionListener{
   
   public GameTimer(int startTime){
     this.startTime=startTime;
+    clock.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+    clock.setForeground(Color.WHITE);
     clock.setText(""+time);
+  }
+  public int getStart() {
+    return startTime;
   }
   public void actionPerformed(ActionEvent ae){
     time--;

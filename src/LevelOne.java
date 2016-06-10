@@ -6,13 +6,14 @@ import java.awt.event.*;
 import javax.imageio.*;
 import java.util.*;
 public class LevelOne extends JPanel {
-  BufferedImage blankImage;
+  BufferedImage blankImage, bImg;
   Picture pic;
   
   public LevelOne() {
     remove(Images.panel);
     try {
       blankImage = ImageIO.read(this.getClass().getResource(Images.names[Images.current] + ".png"));
+      bImg = ImageIO.read(this.getClass().getResource("Level1BG.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -20,5 +21,11 @@ public class LevelOne extends JPanel {
     Images.panel = pic.explore();
     add(Images.panel);
     Images.timer.start();
+    Driver.frame.setSize(1400, 930);
+  }
+  
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    g.drawImage(bImg, 0, 0, this);
   }
 }

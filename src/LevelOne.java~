@@ -8,7 +8,6 @@ import java.util.*;
 public class LevelOne extends JPanel {
   BufferedImage blankImage;
   Picture pic;
-  int colors = 3;
   
   public LevelOne() {
     remove(Images.panel);
@@ -18,7 +17,8 @@ public class LevelOne extends JPanel {
       e.printStackTrace();
     }
     pic = new Picture(blankImage);
-    Images.panel = pic.explore(colors);
+    Images.panel = pic.explore();
     add(Images.panel);
+    Images.timer.start();
   }
 }
