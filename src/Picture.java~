@@ -84,5 +84,11 @@ public class Picture extends SimplePicture
     return output;
     
   }
+
+  /* Main method for testing
+   */
+  public static void main(String[] args) 
+  {
+  }
   
 } // this } is the end of class Picture, put all new methods before this

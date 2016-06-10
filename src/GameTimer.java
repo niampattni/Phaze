@@ -22,7 +22,6 @@ public class GameTimer implements ActionListener{
   /**
    * The constructor of this class sets the start time for the timer, and sets the text on the 
    * JLabel
-   * @param startTime chooses the start time the GameTimer will be given
    */
   public GameTimer(){
     clock.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));

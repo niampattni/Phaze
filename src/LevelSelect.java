@@ -82,17 +82,14 @@ public class LevelSelect extends JPanel {
       clicked = true;
       Images.timer = new GameTimer();
       if (x >= 540 && x <= 746 && y >= 116 && y <= 226) {
-        System.out.println("Level 1");
         Images.level = 1;
         Images.current++;
         Driver.changeScreens("LevelOne");
       } else if (x >= 843 && x <= 1011 && y >= 112 && y <= 201) {
-        System.out.println("Level 2");
         Images.level = 2;
         Images.current++;
         Driver.changeScreens("LevelTwo");
       } else if (x >= 208 && x <= 350 && y >= 121 && y <= 197) {
-        System.out.println("Level 3");
         Images.level = 3;
         Images.current++;
         Driver.changeScreens("LevelThree");

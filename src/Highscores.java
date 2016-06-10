@@ -32,6 +32,7 @@ public class Highscores extends JPanel implements Printable,ActionListener{
   JButton back = new JButton ("Back");
   JLabel title = new JLabel("Highscores");
   JLabel [] labels = new JLabel [10];
+  static String header = "THISISAPHAZEHEADER";
   int temp =0;
   BufferedImage logo;
   /**
@@ -142,99 +143,102 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     public void keyTyped(KeyEvent e) {}
     public void keyReleased(KeyEvent e) {}
   };
-
-/**
- * This method overrides the actionPerformed method in the abstract class ActionListener
- * if statements are used to check what has been pressed
- * a try catch block is used to print the page
- * @param e the action the user has performed
- * 
- */
-public void actionPerformed(ActionEvent e)
-{
-  if (e.getActionCommand().equals("Print"))
+  
+  /**
+   * This method overrides the actionPerformed method in the abstract class ActionListener
+   * if statements are used to check what has been pressed
+   * a try catch block is used to print the page
+   * @param e the action the user has performed
+   * 
+   */
+  public void actionPerformed(ActionEvent e)
   {
-    PrinterJob job = PrinterJob.getPrinterJob();
-    job.setPrintable(this);
-    boolean ok = job.printDialog();
-    if (ok) {
-      try {
-        job.print();
-      } catch (PrinterException ex) {
-      }
-    }
-  }
-  else
-  {
-    Driver.changeScreens("MainMenu");
-  }
-}
-/**
- * This is a return method that returns an arraylist of the highscores
- * a while loop is used to read in every line of the highscores file
- * if statements are used to check the contents of the highscores file
- * a try catch block is used for fileIO
- * @param list the arraylist where the arraylist will be stored
- */
-public static ArrayList <Score> getScores(ArrayList<Score> list){
-  try{
-    BufferedReader in = new BufferedReader(new FileReader("Highscores.txt"));
-    while (true)
+    if (e.getActionCommand().equals("Print"))
     {
-      String line = in.readLine();
-      if (line==null)
-      {
-        break;
+      PrinterJob job = PrinterJob.getPrinterJob();
+      job.setPrintable(this);
+      boolean ok = job.printDialog();
+      if (ok) {
+        try {
+          job.print();
+        } catch (PrinterException ex) {
+        }
       }
-      String name="";
-      String level="";
-      int nameend=0;
-      int levelend = 0;
-      int score=0;
+    }
+    else
+    {
+      Driver.changeScreens("MainMenu");
+    }
+  }
+  /**
+   * This is a return method that returns an arraylist of the highscores
+   * a while loop is used to read in every line of the highscores file
+   * if statements are used to check the contents of the highscores file
+   * a try catch block is used for fileIO
+   * @param list the arraylist where the arraylist will be stored
+   */
+  public static ArrayList <Score> getScores(ArrayList<Score> list){
+    try{
+      BufferedReader in = new BufferedReader(new FileReader("Highscores.phze"));
+      while (true)
+      {
+        String line = in.readLine();
+        if (line==null || !line.equals(Highscores.header))
+        {
+          Driver.error("File has been corrupted, making a new one!", "Scores File Corrupted");
+          PrintWriter out = new PrintWriter(new FileWriter("Highscores.phze"));
+          out.close();
+          break;
+        }
+        String name="";
+        String level="";
+        int nameend=0;
+        int levelend = 0;
+        int score=0;
+        
+        for (int x=0;x<line.length();x++)
+        {
+          if (line.charAt(x)==' ')
+            nameend=x;
+        }
+        name = line.substring(0,nameend);
+        for (int x=nameend;x<line.length();x++)
+        {
+          if (line.charAt(x)==' ')
+            levelend=x;
+        }
+        level=line.substring(nameend,levelend);
+        try{
+          score = Integer.parseInt(line.substring(levelend+1,line.length()));
+        }
+        catch(NumberFormatException ef){
+        }
+        list.add(new Score(score,name,level));
+      }
       
-      for (int x=0;x<line.length();x++)
-      {
-        if (line.charAt(x)==' ')
-          nameend=x;
-      }
-      name = line.substring(0,nameend);
-      for (int x=nameend;x<line.length();x++)
-      {
-        if (line.charAt(x)==' ')
-          levelend=x;
-      }
-      level=line.substring(nameend,levelend);
-      try{
-        score = Integer.parseInt(line.substring(levelend+1,line.length()));
-      }
-      catch(NumberFormatException ef){
-      }
-      list.add(new Score(score,name,level));
     }
-    
-  }
-  catch(IOException e){
-  }
-  return list;
-}
-
-/**
- * Insertion sort method to sort the array
- * if statements are used to check the contents of the array
- * while loop is used to check the array
- * @param array the arraylist to be sorted
- */
-private void sortScores(ArrayList <Score> array) {
-  int n = array.size();
-  for (int j = 1; j < n; j++) {
-    int key = array.get(j).getScore();
-    Score score = array.get(j);
-    int i = j-1;
-    while ( (i > -1) && ( array.get(i).getScore() < key ) ) {
-      array.set(i+1,array.get(i));
-      i--;
+    catch(IOException e){
     }
-    array.set(i+1,score);
+    return list;
   }
-}
+  
+  /**
+   * Insertion sort method to sort the array
+   * if statements are used to check the contents of the array
+   * while loop is used to check the array
+   * @param array the arraylist to be sorted
+   */
+  private void sortScores(ArrayList <Score> array) {
+    int n = array.size();
+    for (int j = 1; j < n; j++) {
+      int key = array.get(j).getScore();
+      Score score = array.get(j);
+      int i = j-1;
+      while ( (i > -1) && ( array.get(i).getScore() < key ) ) {
+        array.set(i+1,array.get(i));
+        i--;
+      }
+      array.set(i+1,score);
+    }
+  }
 }

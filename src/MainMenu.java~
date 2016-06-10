@@ -31,7 +31,7 @@ public class MainMenu extends JPanel implements ActionListener {
   public MainMenu() {
     JLabel bg;
     try {
-      bImg = ImageIO.read(this.getClass().getResource("MainMenuBG.png"));
+      bImg = ImageIO.read(this.getClass().getResource("images\\MainMenuBG.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -50,7 +50,7 @@ public class MainMenu extends JPanel implements ActionListener {
         Driver.changeScreens("Highscores");
       } else if (e.getKeyChar() == 'i') {
         Driver.frame.removeKeyListener(this);
-        System.out.println("Instructions");
+        Driver.changeScreens("Instructions");
       } else if (e.getKeyChar() == 'e') {
         System.exit(0);
       }
@@ -74,7 +74,7 @@ public class MainMenu extends JPanel implements ActionListener {
       } else if (x >= 886 && x <= 1038 && y >= 247 && y <= 400) {
         System.exit(0);
       } else if (x >= 882 && x <= 1173 && y >= 608 && y <= 768) {
-        System.out.println("Instructions");
+        Driver.changeScreens("Instructions");
       }
     }
   };

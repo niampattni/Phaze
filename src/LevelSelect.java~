@@ -32,7 +32,7 @@ public class LevelSelect extends JPanel {
   public LevelSelect() {
     JLabel bg;
     try {
-      bImg = ImageIO.read(this.getClass().getResource("LevelSelectBG.png"));
+      bImg = ImageIO.read(this.getClass().getResource("images\\LevelSelectBG.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }

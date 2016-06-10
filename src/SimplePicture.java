@@ -212,6 +212,7 @@ public class SimplePicture implements DigitalPicture
  /**
   * Method to get a Graphics2D object for this picture which can
   * be used to do 2D drawing on the picture
+  * @return Graphics2D
   */
  public Graphics2D createGraphics()
  {
@@ -487,7 +488,6 @@ public class SimplePicture implements DigitalPicture
          return true;
 
      } catch (Exception ex) {
-         System.out.println("There was an error trying to open " + fileName);
          bufferedImage = new BufferedImage(600,200,
                                            BufferedImage.TYPE_INT_RGB);
          addMessage("Couldn't load " + fileName,5,100);
@@ -619,6 +619,7 @@ public class SimplePicture implements DigitalPicture
   * Method to write the contents of the picture to a file with 
   * the passed name
   * @param fileName the name of the file to write the picture to
+  * @throws IOException
   */
  public void writeOrFail(String fileName) throws IOException
  {
@@ -664,7 +665,6 @@ public class SimplePicture implements DigitalPicture
          this.writeOrFail(fileName);
          return true;
      } catch (Exception ex) {
-         System.out.println("There was an error trying to write " + fileName);
          ex.printStackTrace();
          return false;
      }
@@ -685,6 +685,7 @@ public class SimplePicture implements DigitalPicture
    * Method to get the coordinates of the enclosing rectangle after this
    * transformation is applied to the current picture
    * @return the enclosing rectangle
+   * @param trans
    */
   public Rectangle2D getTransformEnclosingRect(AffineTransform trans)
   {
@@ -731,6 +732,7 @@ public class SimplePicture implements DigitalPicture
    * Method to get the coordinates of the enclosing rectangle after this
    * transformation is applied to the current picture
    * @return the enclosing rectangle
+   * @param trans
    */
   public Rectangle2D getTranslationEnclosingRect(AffineTransform trans)
   {
