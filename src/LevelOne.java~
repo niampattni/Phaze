@@ -11,13 +11,7 @@ public class LevelOne extends JPanel {
   int colors = 3;
   
   public LevelOne() {
-    while (true) {
-      if (Images.completed) {
-        remove(Images.panel);
-        Images.completed = false;
-        break;
-      }
-    }
+    remove(Images.panel);
     try {
       blankImage = ImageIO.read(this.getClass().getResource(Images.names[Images.current] + ".png"));
     } catch (IOException e) {

@@ -416,10 +416,10 @@ public class SimplePicture implements DigitalPicture
   * Method to open a picture explorer on a copy (in memory) of this 
   * simple picture
   */
- public PictureExplorer explore()
+ public PictureExplorer explore(int colors)
  {
    // create a copy of the current picture and explore it
-   return new PictureExplorer(new SimplePicture(this));
+   return new PictureExplorer(new SimplePicture(this), colors);
  }
  
  /**

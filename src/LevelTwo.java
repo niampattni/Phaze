@@ -8,7 +8,6 @@ import java.util.*;
 public class LevelTwo extends JPanel {
   BufferedImage blankImage;
   Picture pic;
-  int colors = 6;
   
   public LevelTwo() {
     remove(Images.panel);
@@ -18,7 +17,7 @@ public class LevelTwo extends JPanel {
       e.printStackTrace();
     }
     pic = new Picture(blankImage);
-    Images.panel = pic.explore(colors);
+    Images.panel = pic.explore();
     add(Images.panel);
   }
   

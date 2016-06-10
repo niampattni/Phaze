@@ -23,9 +23,9 @@ import java.util.*;
 public class PictureExplorer extends JPanel implements MouseMotionListener, ActionListener, MouseListener
 {
   
-  private int rad=255;
-  private int grad=255;
-  private int blah=255;
+  private int RGBRed=255;
+  private int RGBGreen=255;
+  private int RGBBlue=255;
   private int count = 0;
   
   // current indicies
@@ -90,14 +90,14 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
    * Public constructor 
    * @param picture the picture to explore
    */
-  public PictureExplorer(DigitalPicture picture, int colors)
+  public PictureExplorer(DigitalPicture picture)
   {
     // set the fields
     this.picture=picture;
     zoomFactor=1;
     
     // create the window and set things up
-    createWindow(colors);
+    createWindow();
   }
   
   /**
@@ -159,13 +159,13 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
   /**
    * Creates the JFrame and sets everything up
    */
-  private void createWindow(int colors)
+  private void createWindow()
   {
     // create the picture frame and initialize it
     createAndInitPictureFrame();
     
     //create the information panel
-    createInfoPanel(colors);
+    createInfoPanel();
     
     //creates the scrollpane for the picture
     createAndInitScrollingImage();
@@ -312,7 +312,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
    * @param labelFont the font to use for labels
    * @return the color information panel
    */
-  private JPanel createColorInfoPanel(Font labelFont, int colors)
+  private JPanel createColorInfoPanel(Font labelFont)
   {
     // create a color info panel
     JPanel colorInfoPanel = new JPanel();
@@ -323,70 +323,88 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     JButton red = new JButton("Red");
     JButton blue = new JButton ("Blue");
     JButton yellow = new JButton ("Yellow");
-    yellow.addActionListener(new ActionListener()
-                               {
-      public void actionPerformed(ActionEvent e)
-      {
-        rad=255;
-        grad=255;
-        blah=0;
-      }
-    });
-    red.addActionListener(new ActionListener()
-                            {
-      public void actionPerformed(ActionEvent e)
-      {
-        rad=255;
-        grad=0;
-        blah=0;  
-      }
-    });
-    blue.addActionListener(new ActionListener()
-                             {
-      public void actionPerformed(ActionEvent e)
-      {
-        rad=0;
-        grad=0;
-        blah=255;         
-      }
-    });
-    add(red);
-    add(yellow);
-    add(blue);
-    if (colors == 6) {
-      JButton orange = new JButton("Orange");
-      JButton purple = new JButton ("Purple");
-      JButton green = new JButton ("Green");
-      green.addActionListener(new ActionListener()
-                                {
-        public void actionPerformed(ActionEvent e)
-        {
-          rad=0;
-          grad=255;
-          blah=0;  
+    JButton orange = new JButton ("Orange");
+    JButton green = new JButton ("Green");
+    JButton purple = new JButton ("Purple");
+    JButton rb = new JButton ("Red + Blue");
+    JButton by = new JButton ("Blue + Yellow");
+    JButton yr = new JButton ("Yellow + Red");
+    if (Images.level != 3) {
+      red.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          RGBRed = 255;
+          RGBGreen = 0;
+          RGBBlue = 0;
         }
       });
-      orange.addActionListener(new ActionListener()
-                                 {
-        public void actionPerformed(ActionEvent e)
-        {
-          rad=255;
-          grad=128;
-          blah=0;
+      blue.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          RGBRed = 0;
+          RGBGreen = 0;
+          RGBBlue = 255;
         }
       });
-      purple.addActionListener(new ActionListener()
-                                 {
-        public void actionPerformed(ActionEvent e)
-        {
-          rad=128;
-          grad=0;
-          blah=128;  
+      yellow.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          RGBRed = 255;
+          RGBGreen = 255;
+          RGBBlue = 0;
         }
       });
-      add(orange);
-      add(green);
+      add(red);
+      add(blue);
       add(yellow);
+      if (Images.level == 2) {
+        orange.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            RGBRed = 255;
+            RGBGreen = 128;
+            RGBBlue = 0;
+          }
+        });
+        green.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            RGBRed = 0;
+            RGBGreen = 255;
+            RGBBlue = 0;
+          }
+        });
+        purple.addActionListener(new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            RGBRed = 128;
+            RGBGreen = 0;
+            RGBBlue = 128;
+          }
+        });
+        add(orange);
+        add(green);
+        add(purple);
+      }
+    } else {
+      yr.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          RGBRed = 255;
+          RGBGreen = 128;
+          RGBBlue = 0;
+        }
+      });
+      by.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          RGBRed = 0;
+          RGBGreen = 255;
+          RGBBlue = 0;
+        }
+      });
+      rb.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          RGBRed = 128;
+          RGBGreen = 0;
+          RGBBlue = 128;
+        }
+      });
+      add(rb);
+      add(by);
+      add(yr);
     }
     
     /*// create the labels
@@ -423,7 +441,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
    * Creates the North JPanel with all the pixel location
    * and color information
    */
-  private void createInfoPanel(int colors)
+  private void createInfoPanel()
   {
     // create the info panel and set the layout
     JPanel infoPanel = new JPanel();
@@ -437,7 +455,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     //JPanel locationPanel = createLocationPanel(largerFont);
     
     // create the color information panel
-    JPanel colorInfoPanel = createColorInfoPanel(largerFont, colors);
+    JPanel colorInfoPanel = createColorInfoPanel(largerFont);
     
     // add the panels to the info panel
     //infoPanel.add(BorderLayout.NORTH,locationPanel);
@@ -531,8 +549,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
    */
   public void mouseDragged(MouseEvent e)
   {
-    //displayPixelInformation(e);
-    colour(e);
+    
   }
   
   /**
@@ -622,7 +639,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
   }
   private void colour (MouseEvent e)
   {
-    Color color = new Color(rad, grad, blah);
+    Color color = new Color(RGBRed, RGBGreen, RGBBlue);
     createPixel();
     if (isLocationInPicture(e.getX(),e.getY())) {
       if (color.getRGB() == colImg.getRGB(e.getX(), e.getY()) && color.getRGB() != bimg.getRGB(e.getX(), e.getY())) {
@@ -637,12 +654,13 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
         LevelSelect.listener.mouseReleased(e);
       } else {
         Images.current = -1;
+        LevelSelect.clicked = false;
         Driver.changeScreens("MainMenu");
       }
     }
   }
   
-
+  
   /**
    * @author somebody on StackOverflow modified by Niam Pattni to some extent
    */
@@ -659,9 +677,9 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
         currentCol = new Color(pixels[x][y].getRed(), pixels[x][y].getGreen(), pixels[x][y].getBlue());
         int current = currentCol.getRGB();
         if((current != Color.BLACK.getRGB()) && (current != color.getRGB())){
-          pixels[x][y].setRed(rad);
-          pixels[x][y].setGreen(grad);
-          pixels[x][y].setBlue(blah);
+          pixels[x][y].setRed(RGBRed);
+          pixels[x][y].setGreen(RGBGreen);
+          pixels[x][y].setBlue(RGBBlue);
           
           repaint();
           
@@ -809,4 +827,4 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     }
   }
   
-  }
+}
