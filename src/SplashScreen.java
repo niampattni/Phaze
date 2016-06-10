@@ -1,12 +1,41 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+ /**
+   * This class creates the starting splashscreen for the game
+   * <b> Variables </b>
+   * <p>
+   * <b> timer </b> creates a timer for animation
+   * <p>
+   * <b> x </b> used for animation
+   * <p>
+   * <b> y </b> used for animation
+   * <p>
+   * <b> z </b> used for animation
+   * <p>
+   * <b> a </b> used for animation
+   * <p>
+   * <b> b </b> used for animation
+   * <p>
+   * <b> c </b> used for animation
+   * <p>
+   * <b> d </b> used for animation
+   * <p>
+   * <b> e </b> used for animation
+   * <p>
+   * <b> f </b> used for animation
+   * @author Phaze Inc.
+   * @version FINAL - June 10 2016
+   */
 public class SplashScreen extends JPanel implements ActionListener{  
   
   Timer timer = new Timer(0,this);
   int x=0,y=0,z=0,a=0,b=0,c=0,d=0,e=0,f=0;
-  boolean done= false;
-  
+  /**
+   * Method that overrides actionPerformed in the ActionListener interface
+   * if statements are used to check when each part of the animation is over
+   * @param ae the action performed, in this case the timer
+   */
   public void actionPerformed(ActionEvent ae){
     if (x!=1230)
       x++;
@@ -53,6 +82,11 @@ public class SplashScreen extends JPanel implements ActionListener{
       }
     }
   }
+  /**
+   * This method draws out the animation of the splashscreen
+   * if statements are used to check when the other parts of the animation is over
+   * @param g the graphics of the panel
+   */
   public void paintComponent(Graphics g){
     timer.start();
     g.setColor(Color.blue);

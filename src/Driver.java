@@ -1,12 +1,38 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+
+/**
+ * The Driver class is responsible for controlling the flow of the entire
+ * program as well as executing it. It has the main method which creates a new
+ * instance of itself. It sets up the JFrame output window, stores the score
+ * and username of the current player, displays errors, switches screens, and
+ * uses a KeyListener for the chm file.
+ * <p>
+ * <b>Instance Variables: </b>
+ * <p>
+ * <b>frame </b> Creates a static instance of the JFrame class entitled "Paint
+ * Me a Picture!"
+ * <p>
+ * <b>username </b> Creates a static instance of the String class and stores the
+ * username of the current player.
+ * <p>
+ * <b>score </b> Integer storing the score of the current player, starts at 1000.
+ * @author Phaze Inc.
+ * @version FINAL - June 10, 2016
+ */
 public class Driver {
   
-  public static JFrame frame = new JFrame("Game Window");
+  public static JFrame frame = new JFrame("Paint Me a Picture");
   public static String username;
   public static int score = 1000;
   
+  /**
+   * The constructor sets up the JFrame and main KeyListener. It sets the size
+   * to 1200x900 and resizability to false. The default close operation is to
+   * exit on close and the frame is made visible. An instance of the SplashScreen
+   * class is added and a KeyListener for the chm file is added to the frame.
+   */
   public Driver() {
     frame.setSize(1200, 930);
     frame.setVisible(true);
@@ -24,13 +50,31 @@ public class Driver {
     });
   }
   
+  /**
+   * The openCHM() method is called when the F1 key is pressed at any point
+   * in the program. It uses a Runtime exec to open the CHM file and catches
+   * the IOException.
+   */
   private void openCHM() {
-    String path = "hh.exe PaintMeAPicture.chm";
     try {
-      Runtime.getRuntime().exec(path);
+      Runtime.getRuntime().exec("hh.exe PaintMeAPicture.chm");
     } catch (IOException ioe) {}
   }
   
+  /**
+   * The static changeScreens() method updates the JFrame to display the current
+   * screen based on a JPanel. It uses the destination class name as a string
+   * parameter and assigns that String as a Class to a Class instance. Then,
+   * everything is removed from the content pane and a new instance of the class
+   * is added. The ClassNotFoundException, InstantiationException, and IllegalAccessException
+   * are all caught. The frame is then revalidated and repainted.
+   * <p>
+   * <b>Local Variables: </b>
+   * <p>
+   * <b>c </b> Creates an instance of the Class<?> variables based on a Class input.
+   * @param className Instance of the String class representing another class
+   * in the program.
+   */
   public static void changeScreens(String className) {
     Class<?> c = null;
     try {
@@ -48,10 +92,24 @@ public class Driver {
     frame.repaint();
   }
   
+  /**
+   * The static error method creates an isntance of JOPtionPane as an error message.
+   * This is based on thhe parameters of message and title.
+   * @param message Instance of the String class containing the message to be
+   * displayed to the user.
+   * @param title Instance of the String class containing the title to be
+   * displayed to the user.
+   */
   public static void error(String message, String title) {
     JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
   }
   
+  /**
+   * The main method runs the program, it creates an instance of this class, the
+   * Driver class.
+   * @param args Array of String objects containing command line arguments when
+   * running the program.
+   */
   public static void main(String[] args) {
     new Driver();
   }

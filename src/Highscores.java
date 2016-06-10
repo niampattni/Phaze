@@ -6,6 +6,26 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import javax.imageio.*;
+/**
+ * This class will create the Highscores panel, and adds the printing button, and the back button to the panel
+ * <b> Variables </b>
+ * <p>
+ * <b> list </b> An arraylist of the Score class
+ * <p>
+ * <b> print </b> creates a new instance of JButton named print
+ * <p>
+ * <b> back </b> creates a new instance of JButton named back
+ * <p>
+ * <b> title </b> creates a new instance of JLabel named title
+ * <p>
+ * <b> labels </b> creates an array of 10 labels to be used for the top 10 scores
+ * <p>
+ * <b> temp </b> used to store how many labels are being shown
+ * <p>
+ * <b> logo </b> used to store our logo
+ * @author Phaze Inc.
+ * @version FINAL - June 10 2016
+ */
 public class Highscores extends JPanel implements Printable,ActionListener{
   ArrayList<Score> list = new ArrayList<Score>();
   JButton print = new JButton ("Print");
@@ -14,7 +34,11 @@ public class Highscores extends JPanel implements Printable,ActionListener{
   JLabel [] labels = new JLabel [10];
   int temp =0;
   BufferedImage logo;
-  
+  /**
+   * The class constructor creates the Jpanel and adds the top 10 highscores to the panel, and displays them
+   * if structures are used to check the amount of scores in the arraylist.
+   * for loops are used to create and display multiple JLabels.
+  */
   public Highscores(){
     SpringLayout layout = new SpringLayout();
     getScores(list);
@@ -76,7 +100,15 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     this.add(print);
     this.add(back);
   }
-  
+  /**
+   * This is a return method that allows us to print the page
+   * if statements are used to check if there are more than one pages
+   * a try catch block is used for fileIO
+   * @param g the graphics of the page
+   * @param pageFormat how the page is formatted
+   * @param page how many pages there are
+   *   
+   */
   public int print (Graphics g, PageFormat pageFormat, int page) throws PrinterException{
     if (page>0){
       return NO_SUCH_PAGE;
@@ -96,7 +128,13 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     }
     return PAGE_EXISTS;
   }
-  
+  /**
+   * This method overrides the actionPerformed method in the abstract class ActionListener
+   * if statements are used to check what has been pressed
+   * a try catch block is used to print the page
+   * @param e the action the user has performed
+   * 
+   */
   public void actionPerformed(ActionEvent e)
   {
     if (e.getActionCommand().equals("Print"))
@@ -116,7 +154,13 @@ public class Highscores extends JPanel implements Printable,ActionListener{
       Driver.changeScreens("MainMenu");
     }
   }
-  
+  /**
+   * This is a return method that returns an arraylist of the highscores
+   * a while loop is used to read in every line of the highscores file
+   * if statements are used to check the contents of the highscores file
+   * a try catch block is used for fileIO
+   * @param list the arraylist where the arraylist will be stored
+   */
   public static ArrayList<Score> getScores(ArrayList<Score> list){
     try{
       BufferedReader in = new BufferedReader(new FileReader("Highscores.txt"));
@@ -159,7 +203,12 @@ public class Highscores extends JPanel implements Printable,ActionListener{
     return list;
   }
   
-  
+  /**
+   * Insertion sort method to sort the array
+   * if statements are used to check the contents of the array
+   * while loop is used to check the array
+   * @param array the arraylist to be sorted
+   */
   private void sortScores(ArrayList <Score> array) {
     int n = array.size();
     for (int j = 1; j < n; j++) {

@@ -4,13 +4,31 @@ import java.awt.image.*;
 import java.awt.event.*;
 import javax.imageio.*;
 import java.io.*;
+  /**
+   * This class creates the level select screen
+   * <b> Variables </b>
+   * <b>x </b> stores the x coordinate where the user has clicked
+   * <p>
+   * <b>y </b> stores the y coordinate where the user has clicked
+   * <p>
+   * <b> bImg </b> will store the background
+   * <p>
+   * <b> clicked </b> boolean variable that stores if the user has clicked
+   * @author Phaze Inc.
+   * @version FINAL - June 10 2016
+   */ 
 public class LevelSelect extends JPanel {
   
   BufferedImage bImg;
   static int x;
   static int y;
   static boolean clicked = false;
-  
+  /**
+   * The class constructor creates the JPanel and adds the background image and a mouseListener
+   * <b> Variables </b> 
+   * <p>
+   * <b> bg </b> the background
+   */
   public LevelSelect() {
     JLabel bg;
     try {
@@ -55,7 +73,10 @@ public class LevelSelect extends JPanel {
       }
     }
   };
-  
+  /**
+   * This paints the background image
+   * @param g the graphics of the JPanel
+   */
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     g.drawImage(bImg, 0, 0, this);
