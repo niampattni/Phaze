@@ -8,7 +8,7 @@ import javax.swing.*;
  * <p>
  * <b>names </b> Array of String objects containing the Strng names for all images.
  * <p>
- * <b>completion <b> Array of integers containing the colourable sections of each
+ * <b>completion </b> Array of integers containing the colourable sections of each
  * respective image.
  * <p>
  * <b>level </b> Integer representing the current level being played.
@@ -18,7 +18,7 @@ import javax.swing.*;
  * <b>panel </b> JPanel which everything is added to before being added to the
  * main panel.
  * <p>
- * <btimer </b> Creates an instance of the GameTimer class which is imperative
+ * <b> timer </b> Creates an instance of the GameTimer class which is imperative
  * for the game to run correctly.
  * @author Phaze Inc.
  * @version FINAL - June 10, 2016

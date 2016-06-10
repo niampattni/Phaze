@@ -13,7 +13,7 @@ import java.awt.event.*;
  * <p>
  * <b> timer </b> this creates a new instance of the Timer class
  * @author Phaze Inc.
- * @Version FINAL - June 10 2016
+ * @version FINAL - June 10 2016
 */
 public class GameTimer implements ActionListener{
   private int time=0;

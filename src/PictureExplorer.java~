@@ -23,9 +23,13 @@ import java.util.*;
 public class PictureExplorer extends JPanel implements MouseMotionListener, ActionListener, MouseListener
 {
   
+  /** RGB red value */
   private int RGBRed=255;
+  /** RGB green value */
   private int RGBGreen=255;
+  /** RGB blue value */
   private int RGBBlue=255;
+  /** parts filled in picture */
   private int count = 0;
   
   // current indicies
@@ -40,7 +44,9 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
   /** window that allows the user to scroll to see a large picture */
   private JScrollPane scrollPane;
   
+  /** coloured image */
   private BufferedImage colImg;
+  /** blank image */
   private BufferedImage bimg;
   
   // GUI components
@@ -312,7 +318,8 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
   }
   
   /**
-   * Create the color information panel
+   * Create the color information panel. Adds All the buttons necessary for
+   * colouring to the JPanel based on the current level.
    * @param labelFont the font to use for labels
    * @return the color information panel
    */
@@ -641,6 +648,16 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
     imageDisplay.setCurrentX((int) (colIndex * zoomFactor));
     imageDisplay.setCurrentY((int) (rowIndex * zoomFactor));
   }
+  
+  /**
+   * The colour method is reponsible for checking if the image is complete, if
+   * the portion should be coloured, incramenting and resetting the count variable,
+   * ensuring the user picked the correct colour, modifying score, returning to
+   * main menu after level completion, resetting everything for the next time
+   * a uesr wishes to play, adding a user's score to the high scores if needed,
+   * and resetting the size of the JFrame to 1200x900.
+   * @param e Instance of the MouseEvent class.
+   */
   private void colour (MouseEvent e)
   {
     Color color = new Color(RGBRed, RGBGreen, RGBBlue);
@@ -665,7 +682,7 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
         JOptionPane.showMessageDialog(null, "Your score is " + Driver.score, "Score", JOptionPane.INFORMATION_MESSAGE);
         ArrayList <Score> temp = new ArrayList<Score>();
         Highscores.getScores(temp);
-        temp.add(new Score(Driver.score,Driver.username));
+        temp.add(new Score(Driver.score,Driver.username,"level "+Images.level));
         try{
           PrintWriter output = new PrintWriter(new FileWriter("Highscores.txt"));
           for (int x=0;x<temp.size();x++)
@@ -684,7 +701,14 @@ public class PictureExplorer extends JPanel implements MouseMotionListener, Acti
   
   
   /**
-   * @author somebody on StackOverflow modified by Niam Pattni to some extent
+   * The colour() method will fill in and constantly update the picture. It's method
+   * works the same as recursion in a logical sense but the code works very
+   * differently. Since the program is not constantly adding to the stack, it
+   * prevents StackOverflowError.
+   * @param initialX Starting x coordinate for the fill.
+   * @param initialY Starting y coordinate for the fill.
+   * @param colour Instance of the Color class, color to fill wih.
+   * @author anonymous user from StackOverflow modified by Phaze Inc.
    */
   public void colour(int initialX, int initialY, Color color){
     Color currentCol;

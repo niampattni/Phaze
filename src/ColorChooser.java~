@@ -33,8 +33,7 @@ public class ColorChooser
     return color;
   }
   
-  /** Main method for testing the ColorChooser 
-    */
+  /** Main method for testing the ColorChooser */
   public static void main(String[] args)
   {
     Color pickedColor = ColorChooser.pickAColor();
